@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CosmoZen Decor — Precision Laser-Cut Wall Art</title>
+<meta name="description" content="Precision laser-cut and engraved wall décor in MDF and acrylic — designer partitions, 2D and 3D wall art, and fully custom pieces." />
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#17130F; --paper:#FBF6EE; --stone:#F1E9DC; --stone-line:#E2D6C0;
+    --magenta:#E61F93; --magenta-deep:#A5106B; --gold:#D8A73D;
+    --text:#241F19; --muted:#716A5B; --light:#F8F3E9; --light-muted:#D9C9B5;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  html,body{margin:0;padding:0;}
+  body{background:var(--paper); color:var(--text); font-family:'Space Grotesk',sans-serif; overflow-x:hidden;}
+  img{max-width:100%; display:block;}
+  a{color:inherit;}
+  .wrap{max-width:1200px; margin:0 auto; padding:0 32px;}
+  @media (max-width:700px){ .wrap{padding:0 20px;} }
+  h1,h2,h3{font-family:'Fraunces',serif; margin:0; color:var(--text);}
+  .eyebrow{font-size:.78rem; font-weight:600; letter-spacing:.06em; color:var(--magenta-deep); margin-bottom:10px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; padding:14px 26px; border-radius:12px;
+    font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:.95rem; text-decoration:none;
+    border:none; cursor:pointer; transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .btn-primary{ background:linear-gradient(90deg,var(--magenta),var(--magenta-deep)); color:#fff; box-shadow:0 14px 28px -14px rgba(230,31,147,.7);}
+  .btn-primary:hover{ transform:translateY(-2px); }
+  .btn-dark{ background:var(--ink); color:var(--light); }
+  .btn-dark:hover{ transform:translateY(-2px); }
+  .btn-outline{ background:transparent; color:var(--ink); border:1.5px solid var(--ink); }
+
+  /* ===== ANNOUNCEMENT ===== */
+  .announce{ background:var(--ink); color:var(--light-muted); text-align:center; font-size:.82rem; padding:9px 16px; letter-spacing:.02em; }
+  .announce b{ color:var(--gold); }
+
+  /* ===== NAV ===== */
+  header{ position:sticky; top:0; z-index:50; background:rgba(251,246,238,.92); backdrop-filter:blur(8px); border-bottom:1px solid var(--stone-line); }
+  nav{ display:flex; align-items:center; justify-content:space-between; padding:16px 0; }
+  .brand{ display:flex; align-items:center; gap:10px; text-decoration:none; }
+  .brand img{ width:34px; height:34px; object-fit:contain; }
+  .brand span{ font-family:'Fraunces',serif; font-weight:700; font-size:1.15rem; color:var(--text); }
+  .brand span em{ color:var(--magenta); font-style:italic; }
+  .navlinks{ display:flex; gap:30px; list-style:none; margin:0; padding:0; font-size:.92rem; font-weight:600; }
+  .navlinks a{ text-decoration:none; color:var(--text); }
+  .navlinks a:hover{ color:var(--magenta); }
+  .navcta{ display:flex; gap:10px; align-items:center; }
+  .navcta .btn{ padding:10px 18px; font-size:.85rem; }
+  .navtoggle{ display:none; background:none; border:none; font-size:1.5rem; cursor:pointer; }
+  @media (max-width:860px){
+    .navlinks{ display:none; }
+    .navtoggle{ display:block; }
+  }
+
+  /* ===== HERO ===== */
+  .hero{ padding:70px 0 50px; }
+  .hero-grid{ display:grid; grid-template-columns:1.1fr .9fr; gap:50px; align-items:center; }
+  @media (max-width:900px){ .hero-grid{ grid-template-columns:1fr; } }
+  .hero h1{ font-size:3.1rem; line-height:1.06; font-weight:600; }
+  .hero h1 em{ color:var(--magenta); font-style:italic; }
+  .hero p{ font-size:1.05rem; color:var(--muted); max-width:480px; margin:22px 0 30px; line-height:1.55; }
+  .hero-ctas{ display:flex; gap:14px; flex-wrap:wrap; }
+  .hero-art{ position:relative; }
+  .hero-art svg{ width:100%; height:auto; }
+  .cut-path{ fill:none; stroke:var(--magenta); stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round;
+    stroke-dasharray:1400; stroke-dashoffset:1400; animation:drawCut 2.6s cubic-bezier(.65,0,.35,1) forwards .3s; }
+  @keyframes drawCut{ to{ stroke-dashoffset:0; } }
+  @media (prefers-reduced-motion:reduce){ .cut-path{ animation:none; stroke-dashoffset:0; } }
+
+  /* ===== SECTION SHARED ===== */
+  section{ padding:64px 0; }
+  .section-head{ display:flex; justify-content:space-between; align-items:flex-end; gap:20px; margin-bottom:34px; flex-wrap:wrap; }
+  .section-head h2{ font-size:2rem; font-weight:600; }
+  .section-head p{ color:var(--muted); font-size:.95rem; max-width:420px; }
+
+  /* ===== CATEGORY GRID ===== */
+  .cat-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
+  @media (max-width:900px){ .cat-grid{ grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:520px){ .cat-grid{ grid-template-columns:1fr;} }
+  .cat-card{ text-decoration:none; display:block; }
+  .cat-thumb{ position:relative; aspect-ratio:4/5; background:var(--stone); border:1px solid var(--stone-line); border-radius:14px; overflow:hidden; }
+  .cat-thumb .corner{ position:absolute; width:18px; height:18px; border-color:var(--magenta); }
+  .cat-thumb .tl{ top:10px; left:10px; border-top:2px solid var(--magenta); border-left:2px solid var(--magenta); }
+  .cat-thumb .tr{ top:10px; right:10px; border-top:2px solid var(--magenta); border-right:2px solid var(--magenta); }
+  .cat-thumb .bl{ bottom:10px; left:10px; border-bottom:2px solid var(--magenta); border-left:2px solid var(--magenta); }
+  .cat-thumb .br{ bottom:10px; right:10px; border-bottom:2px solid var(--magenta); border-right:2px solid var(--magenta); }
+  .cat-thumb .ph-label{ position:absolute; bottom:14px; left:14px; right:14px; font-size:.68rem; letter-spacing:.05em; color:var(--muted); text-transform:uppercase; }
+  .cat-card h3{ font-size:1.05rem; margin-top:14px; font-weight:600; }
+  .cat-card .cat-sub{ font-size:.85rem; color:var(--muted); margin-top:3px; }
+
+  /* ===== CUSTOM CTA BANNER ===== */
+  .custom-cta{ background:var(--ink); border-radius:26px; padding:56px 48px; color:var(--light); display:grid; grid-template-columns:1.3fr .7fr; gap:30px; align-items:center; }
+  @media (max-width:800px){ .custom-cta{ grid-template-columns:1fr; padding:40px 26px;} }
+  .custom-cta h2{ color:var(--light); font-size:2rem; }
+  .custom-cta p{ color:var(--light-muted); margin-top:14px; max-width:460px; line-height:1.55; }
+  .custom-cta .ctas{ display:flex; gap:12px; flex-wrap:wrap; margin-top:24px; }
+  .price-preview{ background:#241E27; border:1px solid #3A3040; border-radius:16px; padding:22px; text-align:center; }
+  .price-preview .plabel{ font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--light-muted); }
+  .price-preview .pnum{ font-family:'Fraunces',serif; font-size:2.2rem; font-weight:700; color:#fff; margin:6px 0; }
+  .price-preview .pnote{ font-size:.72rem; color:var(--light-muted); }
+
+  /* ===== PRODUCT GRID (per category) ===== */
+  .prod-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:22px; }
+  @media (max-width:900px){ .prod-grid{ grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:520px){ .prod-grid{ grid-template-columns:1fr;} }
+  .prod-card{ background:#fff; border:1px solid var(--stone-line); border-radius:16px; overflow:hidden; }
+  .prod-thumb{ position:relative; aspect-ratio:1/1; background:var(--stone); }
+  .prod-thumb .corner{ position:absolute; width:14px; height:14px; }
+  .prod-thumb .tl{ top:8px; left:8px; border-top:1.5px solid var(--magenta); border-left:1.5px solid var(--magenta); }
+  .prod-thumb .tr{ top:8px; right:8px; border-top:1.5px solid var(--magenta); border-right:1.5px solid var(--magenta); }
+  .prod-thumb .bl{ bottom:8px; left:8px; border-bottom:1.5px solid var(--magenta); border-left:1.5px solid var(--magenta); }
+  .prod-thumb .br{ bottom:8px; right:8px; border-bottom:1.5px solid var(--magenta); border-right:1.5px solid var(--magenta); }
+  .prod-thumb .ph-tag{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:.65rem; color:var(--muted); text-align:center; padding:10px; letter-spacing:.03em; }
+  .prod-body{ padding:16px; }
+  .prod-body h4{ font-family:'Space Grotesk',sans-serif; font-size:.92rem; font-weight:700; margin:0 0 4px; }
+  .prod-body .price{ font-size:.85rem; color:var(--magenta-deep); font-weight:700; margin-bottom:10px; }
+  .prod-body .price small{ color:var(--muted); font-weight:500; }
+  .prod-actions{ display:flex; gap:8px; }
+  .prod-actions .btn{ padding:9px 12px; font-size:.78rem; flex:1; justify-content:center; }
+
+  .tabbar{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:30px; }
+  .tab{ padding:9px 18px; border-radius:999px; border:1.5px solid var(--stone-line); background:#fff; font-size:.85rem; font-weight:600; cursor:pointer; color:var(--muted); }
+  .tab.active{ background:var(--ink); color:#fff; border-color:var(--ink); }
+
+  /* ===== VALUE PROPS ===== */
+  .values{ background:var(--stone); border-radius:26px; padding:50px 40px; }
+  .values-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:30px; margin-top:34px; }
+  @media (max-width:800px){ .values-grid{ grid-template-columns:repeat(2,1fr);} }
+  .value-item h3{ font-size:1.05rem; margin-bottom:8px; }
+  .value-item p{ font-size:.88rem; color:var(--muted); line-height:1.5; margin:0; }
+  .value-mark{ width:38px; height:38px; border-radius:10px; background:var(--ink); color:var(--magenta); display:flex; align-items:center; justify-content:center; font-family:'Fraunces',serif; font-weight:700; margin-bottom:16px; }
+
+  /* ===== PAYMENT SECTION ===== */
+  .pay-card{ background:#fff; border:1px solid var(--stone-line); border-radius:20px; padding:36px; display:grid; grid-template-columns:1.2fr .8fr; gap:30px; align-items:center; }
+  @media (max-width:800px){ .pay-card{ grid-template-columns:1fr; } }
+  .pay-card h2{ font-size:1.7rem; }
+  .pay-card p{ color:var(--muted); font-size:.92rem; line-height:1.55; margin-top:12px; }
+  .pay-badges{ display:flex; gap:10px; margin-top:18px; flex-wrap:wrap; }
+  .pay-badge{ font-size:.72rem; font-weight:700; color:var(--muted); border:1px solid var(--stone-line); padding:6px 12px; border-radius:8px; }
+  .pay-box{ background:var(--stone); border-radius:16px; padding:24px; text-align:center; }
+  .pay-box input{ width:100%; padding:12px; border-radius:10px; border:1.5px solid var(--stone-line); font-family:'Space Grotesk',sans-serif; font-size:1rem; text-align:center; margin-bottom:14px; }
+
+  /* ===== NEWSLETTER ===== */
+  .news{ background:var(--ink); border-radius:26px; padding:50px 40px; text-align:center; color:var(--light); }
+  .news h2{ color:var(--light); font-size:1.8rem; }
+  .news p{ color:var(--light-muted); margin:12px 0 24px; }
+  .news-form{ display:flex; justify-content:center; gap:10px; flex-wrap:wrap; max-width:440px; margin:0 auto; }
+  .news-form input{ flex:1; min-width:220px; padding:13px 16px; border-radius:10px; border:none; font-family:'Space Grotesk',sans-serif; }
+
+  /* ===== FOOTER ===== */
+  footer{ border-top:1px solid var(--stone-line); padding:56px 0 30px; margin-top:40px; }
+  .footer-grid{ display:grid; grid-template-columns:1.4fr repeat(3,1fr); gap:30px; }
+  @media (max-width:800px){ .footer-grid{ grid-template-columns:1fr 1fr;} }
+  .footer-grid h4{ font-size:.85rem; font-weight:700; margin-bottom:14px; }
+  .footer-grid ul{ list-style:none; margin:0; padding:0; }
+  .footer-grid li{ margin-bottom:9px; font-size:.87rem; }
+  .footer-grid a{ text-decoration:none; color:var(--muted); }
+  .footer-grid a:hover{ color:var(--magenta); }
+  .footer-bottom{ display:flex; justify-content:space-between; align-items:center; margin-top:40px; padding-top:24px; border-top:1px solid var(--stone-line); font-size:.8rem; color:var(--muted); flex-wrap:wrap; gap:10px; }
+  .social{ display:flex; gap:14px; }
+
+  /* ===== WHATSAPP FLOAT ===== */
+  .wa-float{ position:fixed; bottom:22px; right:22px; width:56px; height:56px; border-radius:50%; background:#25D366; display:flex; align-items:center; justify-content:center; box-shadow:0 10px 24px rgba(0,0,0,.25); z-index:60; text-decoration:none; }
+  .wa-float svg{ width:28px; height:28px; fill:#fff; }
+</style>
+</head>
+<body>
+
+<div class="announce">Precision laser-cut MDF &amp; acrylic wall art &nbsp;·&nbsp; <b>Custom sizes always available</b></div>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <a class="brand" href="#top">
+        <img src="logo.png" alt="CosmoZen Decor" />
+        <span>CosmoZen<em>Decor</em></span>
+      </a>
+      <ul class="navlinks">
+        <li><a href="#collections">Collections</a></li>
+        <li><a href="#custom">Custom Design</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="navcta">
+        <a class="btn btn-primary" href="https://cosmo-zen-decor.vercel.app/" target="_blank" rel="noopener">Get Instant Price</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">PRECISION LASER-CUT &amp; ENGRAVED DÉCOR</div>
+        <h1>Your vision,<br/><em>precisely cut.</em></h1>
+        <p>We turn MDF and acrylic sheet into architectural wall partitions, sculptural 2D and 3D wall art, and fully bespoke pieces — designed for homes, offices, and hospitality spaces that want something considered.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#collections">Explore Collections</a>
+          <a class="btn btn-outline" href="#custom">Start a Custom Piece</a>
+        </div>
+      </div>
+      <div class="hero-art">
+        <svg viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg">
+          <path class="cut-path" d="M210 40 C260 90 300 90 340 60 C320 120 340 160 390 190 C330 200 300 240 300 300 C270 260 220 260 190 300 C180 250 140 230 80 230 C110 190 100 140 60 100 C120 110 160 90 170 50 C180 70 195 70 210 40 Z"/>
+          <circle cx="210" cy="210" r="6" fill="var(--gold)"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- COLLECTIONS -->
+  <section id="collections">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">SHOP BY COLLECTION</div>
+          <h2>Four disciplines, one design language.</h2>
+        </div>
+        <p>Every category built around its own visual character — from architectural screens to gallery-grade acrylic.</p>
+      </div>
+      <div class="cat-grid">
+        <a class="cat-card" href="#partitions">
+          <div class="cat-thumb">
+            <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+            <div class="ph-label">Photo placeholder</div>
+          </div>
+          <h3>Designer Wall Partitions</h3>
+          <div class="cat-sub">Pattern-cut architectural screens</div>
+        </a>
+        <a class="cat-card" href="#twod">
+          <div class="cat-thumb">
+            <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+            <div class="ph-label">Photo placeholder</div>
+          </div>
+          <h3>2D Wall Décor</h3>
+          <div class="cat-sub">Flat-cut, precision engraved</div>
+        </a>
+        <a class="cat-card" href="#threed">
+          <div class="cat-thumb">
+            <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+            <div class="ph-label">Photo placeholder</div>
+          </div>
+          <h3>3D Wall Décor</h3>
+          <div class="cat-sub">Layered, sculptural depth</div>
+        </a>
+        <a class="cat-card" href="#acrylic">
+          <div class="cat-thumb">
+            <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+            <div class="ph-label">Photo placeholder</div>
+          </div>
+          <h3>Luxury Acrylic Wall Art</h3>
+          <div class="cat-sub">Sleek, light-interactive finish</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CUSTOM + PRICING CTA -->
+  <section id="custom">
+    <div class="wrap">
+      <div class="custom-cta">
+        <div>
+          <div class="eyebrow" style="color:var(--gold);">CUSTOM DESIGN</div>
+          <h2>Bring your own design — or let us create one.</h2>
+          <p>Share a sketch, photo, or reference file and we'll cut it exactly as envisioned — or describe your idea and our team designs it for you. Either way, get a real price before you commit.</p>
+          <div class="ctas">
+            <a class="btn btn-primary" href="https://cosmo-zen-decor.vercel.app/" target="_blank" rel="noopener" id="pricing">Open the Price Calculator</a>
+            <a class="btn btn-outline" style="border-color:var(--light-muted); color:var(--light);" href="https://wa.me/918802715978" target="_blank" rel="noopener">WhatsApp Your Idea</a>
+          </div>
+        </div>
+        <div class="price-preview">
+          <div class="plabel">Estimated Price · Example</div>
+          <div class="pnum">₹1,245</div>
+          <div class="pnote">MDF · 4mm · 60×45cm — calculated live on the pricing tool</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCT SHOWCASE WITH TABS -->
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">THE COLLECTION</div>
+          <h2>Browse by category.</h2>
+        </div>
+      </div>
+      <div class="tabbar">
+        <button class="tab active" data-cat="partitions">Wall Partitions</button>
+        <button class="tab" data-cat="twod">2D Wall Décor</button>
+        <button class="tab" data-cat="threed">3D Wall Décor</button>
+        <button class="tab" data-cat="acrylic">Luxury Acrylic</button>
+      </div>
+      <div class="prod-grid" id="prodGrid"></div>
+    </div>
+  </section>
+
+  <!-- VALUE PROPS -->
+  <section>
+    <div class="wrap">
+      <div class="values">
+        <div class="section-head" style="margin-bottom:0;">
+          <div>
+            <div class="eyebrow">WHY COSMOZEN</div>
+            <h2>Built for precision. Priced with transparency.</h2>
+          </div>
+        </div>
+        <div class="values-grid">
+          <div class="value-item">
+            <div class="value-mark">01</div>
+            <h3>Precision Laser-Cut</h3>
+            <p>Sharp, accurate cutting for clean edges and consistent detail on every piece.</p>
+          </div>
+          <div class="value-item">
+            <div class="value-mark">02</div>
+            <h3>Premium Materials</h3>
+            <p>High-quality Pine Wood-core MDF and acrylic sheet, in 2mm, 4mm and 6mm.</p>
+          </div>
+          <div class="value-item">
+            <div class="value-mark">03</div>
+            <h3>Instant, Honest Pricing</h3>
+            <p>An all-inclusive estimate in seconds — no back-and-forth, no hidden costs.</p>
+          </div>
+          <div class="value-item">
+            <div class="value-mark">04</div>
+            <h3>Made to Order</h3>
+            <p>Every piece cut to your size, in your material — ready-made or fully custom.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAYMENT -->
+  <section id="payment">
+    <div class="wrap">
+      <div class="pay-card">
+        <div>
+          <div class="eyebrow">SECURE BOOKING</div>
+          <h2>Reserve your order with a booking deposit.</h2>
+          <p>Once your quote is confirmed over WhatsApp, you can secure production with a small advance — the balance is settled on completion. All payments are processed securely.</p>
+          <div class="pay-badges">
+            <span class="pay-badge">UPI</span>
+            <span class="pay-badge">Cards</span>
+            <span class="pay-badge">Net Banking</span>
+            <span class="pay-badge">Wallets</span>
+          </div>
+        </div>
+        <div class="pay-box">
+          <div class="plabel" style="color:var(--muted); font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; margin-bottom:10px;">Booking Advance</div>
+          <input type="number" id="advAmount" value="500" min="1" />
+          <button class="btn btn-primary" style="width:100%; justify-content:center;" id="payBtn">Pay Advance Securely</button>
+          <div style="font-size:.7rem; color:var(--muted); margin-top:10px;">Powered by Razorpay · Test mode</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section>
+    <div class="wrap">
+      <div class="news">
+        <h2>Get design ideas &amp; offers.</h2>
+        <p>Occasional emails about new patterns, collections and studio updates. No spam.</p>
+        <form class="news-form" onsubmit="return false;">
+          <input type="email" placeholder="Your email address" required />
+          <button class="btn btn-primary" type="submit">Subscribe</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="brand" href="#top" style="margin-bottom:14px;">
+          <img src="logo.png" alt="CosmoZen Decor" />
+          <span>CosmoZen<em>Decor</em></span>
+        </a>
+        <p style="color:var(--muted); font-size:.87rem; max-width:260px; line-height:1.5;">Precision Crafted. Thoughtfully Designed. Laser-cut MDF &amp; acrylic wall art, made to order in India.</p>
+      </div>
+      <div>
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="#collections">Wall Partitions</a></li>
+          <li><a href="#collections">2D Wall Décor</a></li>
+          <li><a href="#collections">3D Wall Décor</a></li>
+          <li><a href="#collections">Luxury Acrylic</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#custom">Custom Design</a></li>
+          <li><a href="https://cosmo-zen-decor.vercel.app/" target="_blank" rel="noopener">Price Calculator</a></li>
+          <li><a href="#">Trade &amp; B2B</a></li>
+          <li><a href="#">Shipping &amp; Returns</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get in Touch</h4>
+        <ul>
+          <li><a href="https://wa.me/918802715978" target="_blank" rel="noopener">WhatsApp: +91 88027 15978</a></li>
+          <li><a href="mailto:cosmozendecor1@gmail.com">cosmozendecor1@gmail.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 CosmoZen Decor. All rights reserved.</div>
+      <div class="social">
+        <a href="#">Instagram</a><a href="#">Facebook</a><a href="#">Pinterest</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/918802715978" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M20.5 3.5A11.8 11.8 0 0 0 12 0C5.4 0 .1 5.3.1 11.9c0 2.1.6 4.1 1.6 5.9L0 24l6.4-1.7c1.7.9 3.6 1.4 5.6 1.4 6.6 0 11.9-5.3 11.9-11.9 0-3.2-1.2-6.1-3.4-8.3zM12 21.4c-1.7 0-3.4-.5-4.8-1.3l-.3-.2-3.6 1 1-3.5-.2-.4A9.5 9.5 0 0 1 2.5 12C2.5 6.8 6.8 2.5 12 2.5c2.5 0 4.9 1 6.7 2.8a9.4 9.4 0 0 1 2.8 6.7c0 5.2-4.3 9.4-9.5 9.4z"/></svg>
+</a>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+  // ---- Placeholder product data (real photos to be added later) ----
+  const PRODUCTS = {
+    partitions: [
+      ["Floral Vine Screen", "From ₹2,400"], ["Filigree Scroll Panel", "From ₹2,600"],
+      ["Woven Lattice Screen", "From ₹2,200"], ["Nature Motif Panel", "From ₹2,800"],
+    ],
+    twod: [
+      ["Butterfly & Blooms", "From ₹950"], ["Lion Portrait", "From ₹1,100"],
+      ["Om Mandala", "From ₹850"], ["Eagle Portrait", "From ₹1,050"],
+    ],
+    threed: [
+      ["Buddha Mandala Triptych", "From ₹3,200"], ["Layered Tree Panel", "From ₹2,900"],
+      ["Butterfly Swarm", "From ₹2,700"], ["Radha Krishna Triptych", "From ₹3,400"],
+    ],
+    acrylic: [
+      ["Mandala — Coloured", "From ₹1,400"], ["Chess Move", "From ₹1,600"],
+      ["Golden Gate Skyline", "From ₹1,900"], ["Sunset Dock", "From ₹1,300"],
+    ],
+  };
+
+  function renderProducts(cat){
+    const grid = document.getElementById('prodGrid');
+    grid.innerHTML = '';
+    PRODUCTS[cat].forEach(([name, price]) => {
+      const card = document.createElement('div');
+      card.className = 'prod-card';
+      card.innerHTML = `
+        <div class="prod-thumb">
+          <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+          <div class="ph-tag">PHOTO<br/>PLACEHOLDER</div>
+        </div>
+        <div class="prod-body">
+          <h4>${name}</h4>
+          <div class="price">${price} <small>indicative</small></div>
+          <div class="prod-actions">
+            <a class="btn btn-dark" href="https://cosmo-zen-decor.vercel.app/" target="_blank" rel="noopener">Get Exact Price</a>
+            <a class="btn btn-outline" href="https://wa.me/918802715978" target="_blank" rel="noopener">Enquire</a>
+          </div>
+        </div>`;
+      grid.appendChild(card);
+    });
+  }
+  renderProducts('partitions');
+
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      renderProducts(tab.dataset.cat);
+    });
+  });
+
+  // ---- Razorpay booking-advance payment (TEST KEY — replace before going live) ----
+  document.getElementById('payBtn').addEventListener('click', () => {
+    const amount = Math.max(1, Number(document.getElementById('advAmount').value) || 500);
+    const options = {
+      key: "rzp_test_XXXXXXXXXXXXXX", // TODO: replace with your real Razorpay Key ID
+      amount: amount * 100, // paise
+      currency: "INR",
+      name: "CosmoZen Decor",
+      description: "Booking Advance Payment",
+      handler: function(response){
+        alert("Payment captured (test mode). Reference: " + response.razorpay_payment_id + "\n\nIn production, verify this server-side before confirming the order.");
+      },
+      prefill: { name: "", email: "", contact: "" },
+      theme: { color: "#E61F93" }
+    };
+    const rzp = new Razorpay(options);
+    rzp.open();
+  });
+</script>
+</body>
+</html>
