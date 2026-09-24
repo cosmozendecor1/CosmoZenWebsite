@@ -145,6 +145,15 @@
   .pay-box{ background:var(--stone); border-radius:16px; padding:24px; text-align:center; }
   .pay-box input{ width:100%; padding:12px; border-radius:10px; border:1.5px solid var(--stone-line); font-family:'Space Grotesk',sans-serif; font-size:1rem; text-align:center; margin-bottom:14px; }
 
+  .upi-block{ margin-top:16px; padding-top:16px; border-top:1px solid var(--stone-line); }
+  .upi-label{ font-size:.7rem; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; margin-bottom:10px; text-align:center; }
+  .upi-row{ display:flex; align-items:center; justify-content:space-between; gap:8px; background:#fff; border:1px solid var(--stone-line); border-radius:10px; padding:9px 12px; margin-bottom:8px; }
+  .upi-row:last-child{ margin-bottom:0; }
+  .upi-id{ font-family:'Space Grotesk',sans-serif; font-size:.82rem; font-weight:600; color:var(--ink); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .upi-copy{ flex-shrink:0; border:1px solid var(--stone-line); background:var(--stone); border-radius:8px; padding:5px 10px; font-size:.72rem; font-weight:700; color:var(--magenta-deep); cursor:pointer; font-family:'Space Grotesk',sans-serif; transition:background .2s ease; }
+  .upi-copy:hover{ background:var(--blush,#FDE6F1); }
+  .upi-copy.copied{ background:var(--magenta); color:#fff; border-color:var(--magenta); }
+
   /* ===== NEWSLETTER ===== */
   .news{ background:var(--ink); border-radius:26px; padding:50px 40px; text-align:center; color:var(--light); }
   .news h2{ color:var(--light); font-size:1.8rem; }
@@ -359,6 +368,17 @@
           <input type="number" id="advAmount" value="500" min="1" />
           <button class="btn btn-primary" style="width:100%; justify-content:center;" id="payBtn">Pay Advance Securely</button>
           <div style="font-size:.7rem; color:var(--muted); margin-top:10px;">Powered by Razorpay · Test mode</div>
+          <div class="upi-block">
+            <div class="upi-label">Or Pay Directly via UPI</div>
+            <div class="upi-row">
+              <span class="upi-id">8802715978@upi</span>
+              <button type="button" class="upi-copy" data-upi="8802715978@upi">Copy</button>
+            </div>
+            <div class="upi-row">
+              <span class="upi-id">myselfvinu@okhdfcbank</span>
+              <button type="button" class="upi-copy" data-upi="myselfvinu@okhdfcbank">Copy</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -520,6 +540,38 @@
     };
     const rzp = new Razorpay(options);
     rzp.open();
+  });
+
+  // ---- UPI ID copy-to-clipboard (with text-selection fallback) ----
+  function selectText(node){
+    const range = document.createRange();
+    range.selectNodeContents(node);
+    const sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+  }
+  document.querySelectorAll('.upi-copy').forEach(btn => {
+    const idSpan = btn.closest('.upi-row').querySelector('.upi-id');
+    btn.addEventListener('click', () => {
+      const upi = btn.dataset.upi;
+      const flash = (label) => {
+        const original = btn.textContent;
+        btn.textContent = label;
+        btn.classList.add('copied');
+        setTimeout(() => { btn.textContent = original; btn.classList.remove('copied'); }, 1800);
+      };
+      const legacyCopyAttempt = () => {
+        selectText(idSpan);
+        let ok = false;
+        try { ok = document.execCommand('copy'); } catch(e) { ok = false; }
+        flash(ok ? 'Copied!' : 'Selected');
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(upi).then(() => flash('Copied!')).catch(legacyCopyAttempt);
+      } else {
+        legacyCopyAttempt();
+      }
+    });
   });
 </script>
 </body>
