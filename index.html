@@ -228,32 +228,32 @@
       <div class="cat-grid">
         <a class="cat-card" href="#partitions">
           <div class="cat-thumb">
+            <img src="images/wall-partitions/leaf-and-flower.jpg" alt="Designer Wall Partitions" style="width:100%;height:100%;object-fit:cover;display:block;" />
             <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
-            <div class="ph-label">Photo placeholder</div>
           </div>
           <h3>Designer Wall Partitions</h3>
           <div class="cat-sub">Pattern-cut architectural screens</div>
         </a>
         <a class="cat-card" href="#twod">
           <div class="cat-thumb">
+            <img src="images/wall-decor/budhha.jpg" alt="2D Wall Décor" style="width:100%;height:100%;object-fit:cover;display:block;" />
             <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
-            <div class="ph-label">Photo placeholder</div>
           </div>
           <h3>2D Wall Décor</h3>
           <div class="cat-sub">Flat-cut, precision engraved</div>
         </a>
         <a class="cat-card" href="#threed">
           <div class="cat-thumb">
+            <img src="images/3d-wall-decor/butterfly.jpg" alt="3D Wall Décor" style="width:100%;height:100%;object-fit:cover;display:block;" />
             <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
-            <div class="ph-label">Photo placeholder</div>
           </div>
           <h3>3D Wall Décor</h3>
           <div class="cat-sub">Layered, sculptural depth</div>
         </a>
         <a class="cat-card" href="#acrylic">
           <div class="cat-thumb">
+            <img src="images/acrylic/bridge.jpg" alt="Luxury Acrylic Wall Art" style="width:100%;height:100%;object-fit:cover;display:block;" />
             <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
-            <div class="ph-label">Photo placeholder</div>
           </div>
           <h3>Luxury Acrylic Wall Art</h3>
           <div class="cat-sub">Sleek, light-interactive finish</div>
@@ -430,40 +430,61 @@
 
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
-  // ---- Placeholder product data (real photos to be added later) ----
   const PRODUCTS = {
     partitions: [
-      ["Floral Vine Screen", "From ₹2,400"], ["Filigree Scroll Panel", "From ₹2,600"],
-      ["Woven Lattice Screen", "From ₹2,200"], ["Nature Motif Panel", "From ₹2,800"],
+      ["Square Pattern Screen", "wall-partitions/square.jpg"],
+      ["Leaf & Flower Screen", "wall-partitions/leaf-and-flower.jpg"],
+      ["Leaf & Grass Screen", "wall-partitions/leaf-and-grass.jpg"],
+      ["Branches Screen", "wall-partitions/branches.jpg"],
+      ["Geometric Screen 5", "wall-partitions/5.jpg"],
+      ["Geometric Screen 6", "wall-partitions/6.jpg"],
+      ["Geometric Screen 7", "wall-partitions/7.jpg"],
+      ["Geometric Screen 8", "wall-partitions/8.jpg"],
+      ["Geometric Screen 9", "wall-partitions/9.jpg"],
+      ["Geometric Screen 10", "wall-partitions/10.jpg"],
     ],
     twod: [
-      ["Butterfly & Blooms", "From ₹950"], ["Lion Portrait", "From ₹1,100"],
-      ["Om Mandala", "From ₹850"], ["Eagle Portrait", "From ₹1,050"],
+      ["Buddha Wall Art", "wall-decor/budhha.jpg"],
+      ["Horse & Tree Panel", "wall-decor/horsetree.png"],
+      ["Lion Portrait", "wall-decor/lion.jpg"],
+      ["Custom Name Plate", "wall-decor/name-plate.jpg"],
+      ["Relax Wall Art", "wall-decor/relax.jpg"],
+      ["Sri Yantram", "wall-decor/sriyantram.png"],
     ],
     threed: [
-      ["Buddha Mandala Triptych", "From ₹3,200"], ["Layered Tree Panel", "From ₹2,900"],
-      ["Butterfly Swarm", "From ₹2,700"], ["Radha Krishna Triptych", "From ₹3,400"],
+      ["Butterflies Panel", "3d-wall-decor/butterflies.jpg"],
+      ["Butterfly Sculpture", "3d-wall-decor/butterfly.jpg"],
+      ["Flower Panel", "3d-wall-decor/flower.jpg"],
+      ["Little Krishna", "3d-wall-decor/little-krishna.jpg"],
+      ["Rubik's Cube Art", "3d-wall-decor/rubicscube.png"],
+      ["Tree & Moon Panel", "3d-wall-decor/tree-and-moon.jpg"],
+      ["Tree of Eyes", "3d-wall-decor/treeeyes.jpg"],
     ],
     acrylic: [
-      ["Mandala — Coloured", "From ₹1,400"], ["Chess Move", "From ₹1,600"],
-      ["Golden Gate Skyline", "From ₹1,900"], ["Sunset Dock", "From ₹1,300"],
+      ["Bear Acrylic Art", "acrylic/bear.jpg"],
+      ["Bridge Scene", "acrylic/bridge.jpg"],
+      ["Bridge Scene II", "acrylic/bridge2.jpg"],
+      ["Bull Acrylic Art", "acrylic/bull.jpg"],
+      ["Chess Move", "acrylic/chess.jpg"],
+      ["Horse & Girl", "acrylic/horse-girl.jpg"],
+      ["Jeep Acrylic Art", "acrylic/jeep.jpg"],
+      ["River Scene", "acrylic/river.jpg"],
     ],
   };
 
   function renderProducts(cat){
     const grid = document.getElementById('prodGrid');
     grid.innerHTML = '';
-    PRODUCTS[cat].forEach(([name, price]) => {
+    PRODUCTS[cat].forEach(([name, img]) => {
       const card = document.createElement('div');
       card.className = 'prod-card';
       card.innerHTML = `
         <div class="prod-thumb">
+          <img src="images/${img}" alt="${name}" style="width:100%;height:100%;object-fit:cover;display:block;" />
           <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
-          <div class="ph-tag">PHOTO<br/>PLACEHOLDER</div>
         </div>
         <div class="prod-body">
           <h4>${name}</h4>
-          <div class="price">${price} <small>indicative</small></div>
           <div class="prod-actions">
             <a class="btn btn-dark" href="https://cosmo-zen-decor.vercel.app/" target="_blank" rel="noopener">Get Exact Price</a>
             <a class="btn btn-outline" href="https://wa.me/918802715978" target="_blank" rel="noopener">Enquire</a>
