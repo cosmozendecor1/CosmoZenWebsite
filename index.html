@@ -66,22 +66,12 @@
   .hero p{ font-size:1.05rem; color:var(--muted); max-width:480px; margin:22px 0 30px; line-height:1.55; }
   .hero-ctas{ display:flex; gap:14px; flex-wrap:wrap; }
   .hero-art{ position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center; }
-  .hero-art svg{ width:100%; max-width:420px; height:auto; }
-  .hero-art-cap{ margin-top:-6px; font-family:'Fraunces',serif; font-weight:700; font-size:1.3rem; letter-spacing:.01em;
-    opacity:0; animation:capFadeIn .5s ease forwards 1.85s; }
+  .hero-video{ width:100%; max-width:420px; height:auto; border-radius:20px; box-shadow:0 20px 50px -20px rgba(23,19,15,.35); background:var(--stone); }
+  .hero-art-cap{ margin-top:14px; font-family:'Fraunces',serif; font-weight:700; font-size:1.3rem; letter-spacing:.01em;
+    opacity:0; animation:capFadeIn .5s ease forwards .3s; }
   .hero-art-cap em{ color:var(--magenta); font-style:italic; }
   @keyframes capFadeIn{ to{ opacity:1; } }
-  .petal{ fill:none; stroke:var(--magenta); stroke-width:6; stroke-linecap:round; stroke-linejoin:round;
-    stroke-dasharray:700; stroke-dashoffset:700; animation:drawPetal 1.1s cubic-bezier(.34,1,.64,1) forwards; }
-  .petal-1{ animation-delay:.05s; }
-  .petal-2, .petal-3{ animation-delay:.28s; }
-  .petal-4, .petal-5{ animation-delay:.5s; }
-  .petal-dot{ fill:var(--gold); opacity:0; animation:dotIn .4s ease forwards 1.3s; }
-  @keyframes drawPetal{ to{ stroke-dashoffset:0; } }
-  @keyframes dotIn{ to{ opacity:1; } }
-  #heroLotus{ animation:lotusBreathe 4s ease-in-out infinite 1.7s; transform-origin:200px 255px; }
-  @keyframes lotusBreathe{ 0%,100%{ transform:scale(1); } 50%{ transform:scale(1.025); } }
-  @media (prefers-reduced-motion:reduce){ .petal{ animation:none; stroke-dashoffset:0; } .petal-dot{ animation:none; opacity:1; } #heroLotus{ animation:none; } .hero-art-cap{ animation:none; opacity:1; } }
+  @media (prefers-reduced-motion:reduce){ .hero-art-cap{ animation:none; opacity:1; } }
 
   /* ===== SECTION SHARED ===== */
   section{ padding:64px 0; }
@@ -105,12 +95,8 @@
   .material-cut-cta p{ color:var(--muted); font-size:.92rem; margin-bottom:16px; }
   .cat-card{ text-decoration:none; display:block; }
   .cat-thumb{ position:relative; aspect-ratio:4/5; background:var(--stone); border:1px solid var(--stone-line); border-radius:14px; overflow:hidden; }
-  .cat-thumb .corner{ position:absolute; width:18px; height:18px; border-color:var(--magenta); }
-  .cat-thumb .tl{ top:10px; left:10px; border-top:2px solid var(--magenta); border-left:2px solid var(--magenta); }
-  .cat-thumb .tr{ top:10px; right:10px; border-top:2px solid var(--magenta); border-right:2px solid var(--magenta); }
-  .cat-thumb .bl{ bottom:10px; left:10px; border-bottom:2px solid var(--magenta); border-left:2px solid var(--magenta); }
-  .cat-thumb .br{ bottom:10px; right:10px; border-bottom:2px solid var(--magenta); border-right:2px solid var(--magenta); }
-  .cat-thumb .ph-label{ position:absolute; bottom:14px; left:14px; right:14px; font-size:.68rem; letter-spacing:.05em; color:var(--muted); text-transform:uppercase; }
+  .cat-thumb img{ transition:transform .4s ease; }
+  .cat-card:hover .cat-thumb img{ transform:scale(1.04); }
   .cat-card h3{ font-size:1.05rem; margin-top:14px; font-weight:600; }
   .cat-card .cat-sub{ font-size:.85rem; color:var(--muted); margin-top:3px; }
 
@@ -129,14 +115,11 @@
   .prod-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:22px; }
   @media (max-width:900px){ .prod-grid{ grid-template-columns:repeat(2,1fr);} }
   @media (max-width:520px){ .prod-grid{ grid-template-columns:1fr;} }
-  .prod-card{ background:#fff; border:1px solid var(--stone-line); border-radius:16px; overflow:hidden; }
-  .prod-thumb{ position:relative; aspect-ratio:1/1; background:var(--stone); }
-  .prod-thumb .corner{ position:absolute; width:14px; height:14px; }
-  .prod-thumb .tl{ top:8px; left:8px; border-top:1.5px solid var(--magenta); border-left:1.5px solid var(--magenta); }
-  .prod-thumb .tr{ top:8px; right:8px; border-top:1.5px solid var(--magenta); border-right:1.5px solid var(--magenta); }
-  .prod-thumb .bl{ bottom:8px; left:8px; border-bottom:1.5px solid var(--magenta); border-left:1.5px solid var(--magenta); }
-  .prod-thumb .br{ bottom:8px; right:8px; border-bottom:1.5px solid var(--magenta); border-right:1.5px solid var(--magenta); }
-  .prod-thumb .ph-tag{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:.65rem; color:var(--muted); text-align:center; padding:10px; letter-spacing:.03em; }
+  .prod-card{ background:#fff; border:1px solid var(--stone-line); border-radius:16px; overflow:hidden; transition:box-shadow .25s ease, transform .25s ease; }
+  .prod-card:hover{ box-shadow:0 16px 32px -18px rgba(23,19,15,.25); transform:translateY(-3px); }
+  .prod-thumb{ position:relative; aspect-ratio:1/1; background:var(--stone); overflow:hidden; }
+  .prod-thumb img{ transition:transform .4s ease; }
+  .prod-card:hover .prod-thumb img{ transform:scale(1.05); }
   .prod-body{ padding:16px; }
   .prod-body h4{ font-family:'Space Grotesk',sans-serif; font-size:.92rem; font-weight:700; margin:0 0 4px; }
   .prod-body .price{ font-size:.85rem; color:var(--magenta-deep); font-weight:700; margin-bottom:10px; }
@@ -238,16 +221,7 @@
         </div>
       </div>
       <div class="hero-art">
-        <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" aria-label="CosmoZen Decor lotus mark, animated">
-          <g id="heroLotus">
-            <path class="petal petal-1" d="M200,255 C185,220 175,170 175,130 C175,95 185,65 200,40 C215,65 225,95 225,130 C225,170 215,220 200,255 Z"/>
-            <path class="petal petal-2" d="M200,255 C170,235 140,210 120,175 C105,148 98,118 100,90 C130,100 155,120 172,148 C188,175 197,215 200,255 Z"/>
-            <path class="petal petal-3" d="M200,255 C230,235 260,210 280,175 C295,148 302,118 300,90 C270,100 245,120 228,148 C212,175 203,215 200,255 Z"/>
-            <path class="petal petal-4" d="M200,255 C160,248 118,238 82,220 C55,206 35,188 25,168 C60,163 98,168 130,185 C160,200 185,225 200,255 Z"/>
-            <path class="petal petal-5" d="M200,255 C240,248 282,238 318,220 C345,206 365,188 375,168 C340,163 302,168 270,185 C240,200 215,225 200,255 Z"/>
-            <circle class="petal-dot" cx="200" cy="255" r="5"/>
-          </g>
-        </svg>
+        <video class="hero-video" src="videos/hero-presenter.mp4" controls playsinline preload="metadata" aria-label="CosmoZen Decor brand video — click to play"></video>
         <div class="hero-art-cap">CosmoZen<em>Decor</em></div>
       </div>
     </div>
@@ -267,7 +241,6 @@
         <a class="cat-card" href="#partitions">
           <div class="cat-thumb">
             <img src="images/wall-partitions/leaf-and-flower.jpg" alt="Designer Wall Partitions" style="width:100%;height:100%;object-fit:cover;display:block;" />
-            <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
           </div>
           <h3>Designer Wall Partitions</h3>
           <div class="cat-sub">Pattern-cut architectural screens</div>
@@ -275,7 +248,6 @@
         <a class="cat-card" href="#twod">
           <div class="cat-thumb">
             <img src="images/wall-decor/radha-krishna.jpg" alt="2D Wall Décor" style="width:100%;height:100%;object-fit:cover;display:block;" />
-            <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
           </div>
           <h3>2D Wall Décor</h3>
           <div class="cat-sub">Flat-cut, precision engraved</div>
@@ -283,7 +255,6 @@
         <a class="cat-card" href="#threed">
           <div class="cat-thumb">
             <img src="images/3d-wall-decor/butterfly-triptych.jpg" alt="3D Relief Laser-Cut Wall Art" style="width:100%;height:100%;object-fit:cover;display:block;" />
-            <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
           </div>
           <h3>3D Relief Laser-Cut Wall Art</h3>
           <div class="cat-sub">Layered, sculptural depth</div>
@@ -291,7 +262,6 @@
         <a class="cat-card" href="#acrylic">
           <div class="cat-thumb">
             <img src="images/acrylic/bridge.jpg" alt="Luxury Acrylic Wall Art" style="width:100%;height:100%;object-fit:cover;display:block;" />
-            <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
           </div>
           <h3>Luxury Acrylic Wall Art</h3>
           <div class="cat-sub">Sleek, light-interactive finish</div>
@@ -525,6 +495,7 @@
       ["Geometric Screen 9", "wall-partitions/9.jpg"],
       ["Geometric Screen 10", "wall-partitions/10.jpg"],
       ["Leaf Lattice Screen", "wall-partitions/leaf-lattice-screen.png"],
+      ["Pattern Collection", "wall-partitions/pattern-collection.jpg"],
     ],
     twod: [
       ["Buddha Wall Art", "wall-decor/budhha.jpg"],
@@ -549,6 +520,8 @@
       ["Rubik's Cube Art", "3d-wall-decor/rubicscube.png"],
       ["Tree & Moon Panel", "3d-wall-decor/tree-and-moon.jpg"],
       ["Tree of Eyes", "3d-wall-decor/treeeyes.jpg"],
+      ["Starlight Leaves Panel", "3d-wall-decor/starlight-leaves.jpg"],
+      ["Buds & Leaves Panel", "3d-wall-decor/buds-and-leaves.jpg"],
     ],
     acrylic: [
       ["Bear Acrylic Art", "acrylic/bear.jpg"],
@@ -571,7 +544,6 @@
       card.innerHTML = `
         <div class="prod-thumb">
           <img src="images/${img}" alt="${name}" style="width:100%;height:100%;object-fit:cover;display:block;" />
-          <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
         </div>
         <div class="prod-body">
           <h4>${name}</h4>
