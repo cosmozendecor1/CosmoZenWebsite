@@ -93,6 +93,16 @@
   .cat-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
   @media (max-width:900px){ .cat-grid{ grid-template-columns:repeat(2,1fr);} }
   @media (max-width:520px){ .cat-grid{ grid-template-columns:1fr;} }
+
+  /* ===== CUSTOM CUT RAW MATERIAL ===== */
+  .material-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:24px; margin-top:8px; }
+  @media (max-width:700px){ .material-grid{ grid-template-columns:1fr; } }
+  .material-card{ background:#fff; border:1px solid var(--stone-line); border-radius:16px; overflow:hidden; }
+  .material-card img{ width:100%; aspect-ratio:16/10; object-fit:cover; display:block; }
+  .material-card .mc-body{ padding:18px 22px 22px; }
+  .material-card h3{ font-size:1.1rem; font-weight:600; margin-bottom:4px; }
+  .material-cut-cta{ text-align:center; margin-top:32px; }
+  .material-cut-cta p{ color:var(--muted); font-size:.92rem; margin-bottom:16px; }
   .cat-card{ text-decoration:none; display:block; }
   .cat-thumb{ position:relative; aspect-ratio:4/5; background:var(--stone); border:1px solid var(--stone-line); border-radius:14px; overflow:hidden; }
   .cat-thumb .corner{ position:absolute; width:18px; height:18px; border-color:var(--magenta); }
@@ -328,6 +338,39 @@
         <button class="tab" data-cat="acrylic">Luxury Acrylic</button>
       </div>
       <div class="prod-grid" id="prodGrid"></div>
+    </div>
+  </section>
+
+  <!-- CUSTOM CUT RAW MATERIAL -->
+  <section id="customcut">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">RAW MATERIAL, YOUR SPEC</div>
+          <h2>Custom Cut Acrylic/MDF.</h2>
+        </div>
+        <p>No design needed — just a flat panel cut precisely to the dimensions, material, and thickness you specify.</p>
+      </div>
+      <div class="material-grid">
+        <div class="material-card">
+          <img src="images/materials/mdf-swatches.png" alt="MDF wood veneer swatches" />
+          <div class="mc-body">
+            <h3>MDF Wood</h3>
+            <div class="cat-sub">2mm · 4mm · 6mm, natural wood-tone finishes</div>
+          </div>
+        </div>
+        <div class="material-card">
+          <img src="images/materials/acrylic-swatches.png" alt="Acrylic colour swatches" />
+          <div class="mc-body">
+            <h3>Acrylic</h3>
+            <div class="cat-sub">2mm · 4mm · 6mm, wide range of colours</div>
+          </div>
+        </div>
+      </div>
+      <div class="material-cut-cta">
+        <p>Have your own dimensions in mind? Send us the specs and we'll quote it directly.</p>
+        <a class="btn btn-primary" href="https://wa.me/918802715978" target="_blank" rel="noopener">Get a Custom Quote</a>
+      </div>
     </div>
   </section>
 
