@@ -167,6 +167,30 @@
   .value-item p{ font-size:1.05rem; color:var(--muted); line-height:1.6; margin:0; }
   .value-mark{ width:38px; height:38px; border-radius:10px; background:var(--ink); color:var(--magenta); display:flex; align-items:center; justify-content:center; font-family:'Fraunces',serif; font-weight:700; margin-bottom:16px; }
 
+  /* ===== REVIEWS ===== */
+  .rev-summary{ display:flex; align-items:center; justify-content:space-between; gap:16px 28px; flex-wrap:wrap; margin-bottom:24px; }
+  .rev-score{ display:flex; align-items:center; gap:14px; }
+  .rev-avg{ font-family:'Fraunces',serif; font-size:2.8rem; font-weight:700; line-height:1; }
+  .rev-count{ color:var(--muted); font-size:1rem; margin-top:2px; }
+  .stars{ display:inline-flex; gap:2px; color:var(--gold); }
+  .stars svg{ width:20px; height:20px; }
+  .rev-actions{ display:flex; gap:12px; flex-wrap:wrap; }
+  .rev-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+  @media (max-width:900px){ .rev-grid{ grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .rev-grid{ grid-template-columns:1fr;} }
+  .rev-card{ background:#fff; border:1px solid var(--stone-line); border-radius:16px; padding:22px; display:flex; flex-direction:column; gap:12px; }
+  .rev-photo{ width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:12px; background:var(--stone); }
+  .rev-text{ font-size:1.05rem; line-height:1.6; margin:0; }
+  .rev-meta{ margin-top:auto; font-size:.95rem; color:var(--muted); line-height:1.5; }
+  .rev-meta strong{ display:block; color:var(--text); font-size:1.02rem; }
+  .rev-badge{ display:inline-block; margin-top:6px; padding:3px 10px; border-radius:999px; background:#E7F3EA; color:#1E7A3D; font-size:.9rem; font-weight:700; }
+  .rev-more{ text-align:center; margin-top:26px; }
+  .rev-empty{ background:#fff; border:1px dashed var(--stone-line); border-radius:20px; padding:36px 32px; text-align:center; }
+  .rev-empty h3{ font-size:1.5rem; font-weight:600; }
+  .rev-empty p{ color:var(--muted); font-size:1.1rem; line-height:1.6; max-width:640px; margin:12px auto 22px; }
+  .rev-empty .rev-actions{ justify-content:center; }
+  .rev-note{ color:var(--muted); font-size:.95rem; text-align:center; margin:22px auto 0; max-width:720px; line-height:1.55; }
+
   /* ===== PAYMENT SECTION ===== */
   .pay-card{ background:#fff; border:1px solid var(--stone-line); border-radius:20px; padding:36px; display:grid; grid-template-columns:1.2fr .8fr; gap:30px; align-items:center; }
   @media (max-width:800px){ .pay-card{ grid-template-columns:1fr; } }
@@ -500,6 +524,21 @@
     </div>
   </section>
 
+  <!-- REVIEWS -->
+  <section id="reviews">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">CUSTOMER REVIEWS</div>
+          <h2>What customers say.</h2>
+        </div>
+        <p>Feedback from real orders, shown as it was sent to us.</p>
+      </div>
+      <div id="reviewsBody"></div>
+      <p class="rev-note">Every review here comes from a real order. We publish first name and city only with the customer&rsquo;s permission, and we only trim reviews for length.</p>
+    </div>
+  </section>
+
   <!-- PAYMENT -->
   <section id="payment">
     <div class="wrap">
@@ -574,6 +613,7 @@
         <h4>Company</h4>
         <ul>
           <li><a href="#about">About Us</a></li>
+          <li><a href="#reviews">Customer Reviews</a></li>
           <li><a href="#custom">Custom Design</a></li>
           <li><a href="https://cosmo-zen-decor.vercel.app/" target="_blank" rel="noopener">Price Calculator</a></li>
           <li><a href="CosmoZenDecor_Catalogue.pdf" target="_blank" rel="noopener" download>Download Catalogue</a></li>
@@ -926,6 +966,88 @@
       renderProducts(tab.dataset.cat);
     });
   });
+
+  // ---- Customer reviews: real reviews only, loaded from reviews.json ----
+  (function(){
+    const body = document.getElementById('reviewsBody');
+    if (!body) return;
+    const LIMIT = 6;
+    const STAR = 'M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z';
+    document.body.insertAdjacentHTML('beforeend', '<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><clipPath id="halfStarClip"><rect x="0" y="0" width="12" height="24"/></clipPath></defs></svg>');
+    const starSvg = k => '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="' + STAR + '" fill="' + (k === 'full' ? 'currentColor' : 'none') + '" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>' + (k === 'half' ? '<path d="' + STAR + '" fill="currentColor" clip-path="url(#halfStarClip)"/>' : '') + '</svg>';
+    function starsEl(value){
+      const n = Math.round(value * 2) / 2;
+      const s = document.createElement('span');
+      s.className = 'stars'; s.setAttribute('role', 'img'); s.setAttribute('aria-label', n + ' out of 5 stars');
+      s.innerHTML = [1, 2, 3, 4, 5].map(i => starSvg(n >= i ? 'full' : (n >= i - 0.5 ? 'half' : 'empty'))).join('');
+      return s;
+    }
+    const REVIEW_MSG = "Hi CosmoZen Decor, I'd like to leave a review.\n\nProduct:\nRating (1 to 5):\nMy review:\nFirst name and city to show:\n\nYou may publish this review, and any photos I attach, on your website: Yes / No";
+    function link(href, label, cls){
+      const a = document.createElement('a');
+      a.className = 'btn ' + cls; a.href = href; a.target = '_blank'; a.rel = 'noopener'; a.textContent = label;
+      return a;
+    }
+    function clean(list){
+      return (Array.isArray(list) ? list : []).map(r => ({
+        name: String(r.name || '').trim().slice(0, 40),
+        city: String(r.city || '').trim().slice(0, 40),
+        product: String(r.product || '').trim().slice(0, 60),
+        text: String(r.text || '').trim().slice(0, 600),
+        date: String(r.date || '').trim().slice(0, 20),
+        rating: Math.round(Number(r.rating)),
+        verified: r.verified === true,
+        photo: /^images\/reviews\/[\w.-]+$/.test(String(r.photo || '')) ? String(r.photo) : ''
+      })).filter(r => r.name && r.text && r.rating >= 1 && r.rating <= 5);
+    }
+    function render(data){
+      const reviews = clean(data && data.reviews);
+      const google = data && typeof data.google_url === 'string' && /^https:\/\//.test(data.google_url) ? data.google_url : '';
+      body.textContent = '';
+      const actions = document.createElement('div');
+      actions.className = 'rev-actions';
+      actions.append(link('https://wa.me/918802715978?text=' + encodeURIComponent(REVIEW_MSG), 'Write a review on WhatsApp', 'btn-primary'));
+      if (google) actions.append(link(google, 'Review us on Google', 'btn-outline'));
+      if (!reviews.length) {
+        const box = document.createElement('div'); box.className = 'rev-empty';
+        const h = document.createElement('h3'); h.textContent = 'No reviews yet, and we would like to keep it honest.';
+        const p = document.createElement('p'); p.textContent = 'We are a new studio, so we would rather wait for real reviews than write our own. Ordered from us? Tell us how it went and, with your OK, it appears right here.';
+        box.append(h, p, actions); body.appendChild(box);
+        return;
+      }
+      const avg = reviews.reduce((t, r) => t + r.rating, 0) / reviews.length;
+      const summary = document.createElement('div'); summary.className = 'rev-summary';
+      const score = document.createElement('div'); score.className = 'rev-score';
+      const num = document.createElement('div'); num.className = 'rev-avg'; num.textContent = avg.toFixed(1);
+      const meta = document.createElement('div');
+      meta.appendChild(starsEl(avg));
+      const cnt = document.createElement('div'); cnt.className = 'rev-count'; cnt.textContent = 'Based on ' + reviews.length + (reviews.length === 1 ? ' review' : ' reviews');
+      meta.appendChild(cnt);
+      score.append(num, meta); summary.append(score, actions);
+      const grid = document.createElement('div'); grid.className = 'rev-grid';
+      function add(r){
+        const c = document.createElement('article'); c.className = 'rev-card';
+        if (r.photo) { const im = document.createElement('img'); im.className = 'rev-photo'; im.src = r.photo; im.alt = 'Photo shared by ' + r.name; im.onerror = () => im.remove(); c.appendChild(im); }
+        c.appendChild(starsEl(r.rating));
+        const t = document.createElement('p'); t.className = 'rev-text'; t.textContent = '“' + r.text + '”'; c.appendChild(t);
+        const m = document.createElement('div'); m.className = 'rev-meta';
+        const n = document.createElement('strong'); n.textContent = r.name; m.appendChild(n);
+        const line = [r.city, r.product, r.date].filter(Boolean).join(' · ');
+        if (line) m.appendChild(document.createTextNode(line));
+        if (r.verified) { const b = document.createElement('span'); b.className = 'rev-badge'; b.textContent = 'Verified order'; m.appendChild(document.createElement('br')); m.appendChild(b); }
+        c.appendChild(m); grid.appendChild(c);
+      }
+      reviews.slice(0, LIMIT).forEach(add);
+      body.append(summary, grid);
+      if (reviews.length > LIMIT) {
+        const more = document.createElement('div'); more.className = 'rev-more';
+        const bt = document.createElement('button'); bt.type = 'button'; bt.className = 'btn btn-outline'; bt.textContent = 'Show all ' + reviews.length + ' reviews';
+        bt.addEventListener('click', () => { reviews.slice(LIMIT).forEach(add); more.remove(); });
+        more.appendChild(bt); body.appendChild(more);
+      }
+    }
+    fetch('reviews.json', { cache: 'no-cache' }).then(r => r.ok ? r.json() : null).then(render).catch(() => render(null));
+  })();
 
   // ---- Razorpay booking-advance payment (TEST KEY — replace before going live) ----
   document.getElementById('payBtn').addEventListener('click', () => {
