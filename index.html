@@ -112,20 +112,31 @@
   .price-preview .pnote{ font-size:.72rem; color:var(--light-muted); }
 
   /* ===== PRODUCT GRID (per category) ===== */
-  .prod-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:22px; }
+  .prod-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
   @media (max-width:900px){ .prod-grid{ grid-template-columns:repeat(2,1fr);} }
-  @media (max-width:520px){ .prod-grid{ grid-template-columns:1fr;} }
+  @media (max-width:560px){ .prod-grid{ grid-template-columns:1fr;} }
   .prod-card{ background:#fff; border:1px solid var(--stone-line); border-radius:16px; overflow:hidden; transition:box-shadow .25s ease, transform .25s ease; }
   .prod-card:hover{ box-shadow:0 16px 32px -18px rgba(23,19,15,.25); transform:translateY(-3px); }
   .prod-thumb{ position:relative; aspect-ratio:1/1; background:var(--stone); overflow:hidden; }
   .prod-thumb img{ transition:transform .4s ease; }
   .prod-card:hover .prod-thumb img{ transform:scale(1.05); }
-  .prod-body{ padding:16px; }
-  .prod-body h4{ font-family:'Space Grotesk',sans-serif; font-size:.92rem; font-weight:700; margin:0 0 4px; }
-  .prod-body .price{ font-size:.85rem; color:var(--magenta-deep); font-weight:700; margin-bottom:10px; }
-  .prod-body .price small{ color:var(--muted); font-weight:500; }
-  .prod-actions{ display:flex; gap:8px; }
-  .prod-actions .btn{ padding:9px 12px; font-size:.78rem; flex:1; justify-content:center; }
+  .prod-body{ padding:16px 18px 18px; }
+  .prod-body h4{ font-family:'Space Grotesk',sans-serif; font-size:1rem; font-weight:700; margin:0; }
+  .prod-opts{ display:grid; grid-template-columns:.9fr 1.1fr; gap:10px; margin-top:14px; }
+  .opt label{ display:block; font-size:.66rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--muted); margin-bottom:5px; }
+  .opt select, .opt input{ width:100%; padding:9px 10px; border:1.5px solid var(--stone-line); border-radius:10px; background:#fff; font-family:'Space Grotesk',sans-serif; font-size:.8rem; color:var(--text); }
+  .opt select:focus, .opt input:focus{ outline:2px solid var(--magenta); outline-offset:1px; }
+  .custom-size{ display:none; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px; }
+  .custom-size.show{ display:grid; }
+  .prod-price{ display:flex; align-items:baseline; justify-content:space-between; gap:8px; margin:16px 0 12px; }
+  .prod-price .amt{ font-family:'Fraunces',serif; font-size:1.45rem; font-weight:700; color:var(--text); }
+  .prod-price small{ color:var(--muted); font-size:.72rem; text-align:right; }
+  .prod-add{ width:100%; justify-content:center; padding:12px 18px; font-size:.9rem; }
+  .prod-add.added{ background:var(--ink); box-shadow:none; }
+  .prod-links{ display:flex; justify-content:space-between; margin-top:12px; font-size:.78rem; }
+  .prod-links a{ color:var(--muted); }
+  .prod-links a:hover{ color:var(--magenta); }
+  .price-note{ color:var(--muted); font-size:.8rem; margin-top:22px; text-align:center; }
 
   .tabbar{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:30px; }
   .tab{ padding:9px 18px; border-radius:999px; border:1.5px solid var(--stone-line); background:#fff; font-size:.85rem; font-weight:600; cursor:pointer; color:var(--muted); }
@@ -177,6 +188,54 @@
   .footer-bottom{ display:flex; justify-content:space-between; align-items:center; margin-top:40px; padding-top:24px; border-top:1px solid var(--stone-line); font-size:.8rem; color:var(--muted); flex-wrap:wrap; gap:10px; }
   .social{ display:flex; gap:14px; }
 
+  /* ===== CART ===== */
+  .cart-btn{ position:relative; display:inline-flex; align-items:center; justify-content:center; width:42px; height:42px; border-radius:12px; border:1.5px solid var(--ink); background:transparent; color:var(--ink); cursor:pointer; transition:background .2s ease, color .2s ease; }
+  .cart-btn:hover{ background:var(--ink); color:var(--light); }
+  .cart-btn svg{ width:20px; height:20px; }
+  .cart-badge{ position:absolute; top:-8px; right:-8px; min-width:20px; height:20px; padding:0 5px; border-radius:999px; background:var(--magenta); color:#fff; font-size:.68rem; font-weight:700; display:flex; align-items:center; justify-content:center; }
+  .cart-badge[hidden]{ display:none; }
+  .cart-badge.bump{ animation:badgeBump .35s ease; }
+  @keyframes badgeBump{ 50%{ transform:scale(1.4); } }
+  .cart-overlay{ position:fixed; inset:0; background:rgba(23,19,15,.5); opacity:0; pointer-events:none; transition:opacity .25s ease; z-index:80; }
+  .cart-overlay.open{ opacity:1; pointer-events:auto; }
+  .cart-drawer{ position:fixed; top:0; right:0; height:100%; width:min(440px,100%); background:var(--paper); z-index:90; transform:translateX(100%); transition:transform .3s ease; display:flex; flex-direction:column; box-shadow:-20px 0 50px -20px rgba(23,19,15,.4); visibility:hidden; }
+  .cart-drawer.open{ transform:none; visibility:visible; }
+  .cart-head{ display:flex; align-items:center; justify-content:space-between; padding:20px 22px; border-bottom:1px solid var(--stone-line); }
+  .cart-head h2{ font-size:1.3rem; font-weight:600; }
+  .cart-close{ width:36px; height:36px; border-radius:10px; border:1px solid var(--stone-line); background:#fff; font-size:1.2rem; line-height:1; cursor:pointer; color:var(--text); }
+  .cart-items{ flex:1; overflow-y:auto; padding:6px 22px; }
+  .cart-empty{ text-align:center; color:var(--muted); padding:70px 10px; line-height:1.6; }
+  .cart-item{ display:grid; grid-template-columns:72px 1fr auto; gap:14px; padding:16px 0; border-bottom:1px solid var(--stone-line); }
+  .cart-item img{ width:72px; height:72px; object-fit:cover; border-radius:10px; background:var(--stone); }
+  .ci-name{ font-weight:700; font-size:.92rem; line-height:1.3; }
+  .ci-meta{ color:var(--muted); font-size:.78rem; margin-top:3px; line-height:1.4; }
+  .ci-qty{ display:inline-flex; align-items:center; border:1px solid var(--stone-line); border-radius:8px; margin-top:9px; background:#fff; }
+  .ci-qty button{ width:30px; height:30px; border:none; background:none; cursor:pointer; font-size:1rem; color:var(--text); }
+  .ci-qty span{ min-width:26px; text-align:center; font-size:.85rem; font-weight:600; }
+  .ci-right{ display:flex; flex-direction:column; justify-content:space-between; align-items:flex-end; }
+  .ci-price{ font-weight:700; font-size:.92rem; }
+  .ci-remove{ background:none; border:none; color:var(--muted); font-size:.75rem; text-decoration:underline; cursor:pointer; padding:0; font-family:'Space Grotesk',sans-serif; }
+  .cart-foot{ border-top:1px solid var(--stone-line); padding:18px 22px 22px; background:#fff; }
+  .cart-total{ display:flex; justify-content:space-between; font-weight:700; font-size:1.1rem; }
+  .cart-note{ color:var(--muted); font-size:.75rem; margin:6px 0 14px; line-height:1.5; }
+  .cart-foot .btn{ width:100%; justify-content:center; }
+  .cart-foot .btn[disabled]{ opacity:.45; cursor:not-allowed; transform:none; }
+  .cart-foot-links{ display:flex; justify-content:space-between; margin-top:12px; font-size:.78rem; }
+  .cart-foot-links a, .cart-foot-links button{ color:var(--muted); background:none; border:none; padding:0; cursor:pointer; font-family:'Space Grotesk',sans-serif; font-size:.78rem; text-decoration:underline; }
+  body.cart-open{ overflow:hidden; }
+  .navlinks a{ white-space:nowrap; }
+  @media (max-width:1180px){
+    .navlinks{ gap:20px; font-size:.86rem; }
+    .navcta .btn{ padding:9px 14px; font-size:.8rem; }
+  }
+  @media (max-width:640px){
+    nav{ gap:10px; }
+    .navcta{ gap:8px; }
+    .navcta .btn{ padding:9px 12px; font-size:.78rem; }
+    .brand span{ font-size:1rem; }
+  }
+  @media (max-width:520px){ .navcta .btn-outline{ display:none; } }
+
   /* ===== WHATSAPP FLOAT ===== */
   .wa-float{ position:fixed; bottom:22px; right:22px; width:56px; height:56px; border-radius:50%; background:#25D366; display:flex; align-items:center; justify-content:center; box-shadow:0 10px 24px rgba(0,0,0,.25); z-index:60; text-decoration:none; }
   .wa-float svg{ width:28px; height:28px; fill:#fff; }
@@ -202,6 +261,10 @@
       <div class="navcta">
         <a class="btn btn-outline" href="CosmoZenDecor_Catalogue.pdf" target="_blank" rel="noopener" download>Download Catalogue</a>
         <a class="btn btn-primary" href="https://cosmo-zen-decor.vercel.app/" target="_blank" rel="noopener">Get Instant Price</a>
+        <button type="button" class="cart-btn" id="cartBtn" aria-label="Open cart">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7h12l-1 13H7L6 7Z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+          <span class="cart-badge" id="cartBadge" hidden>0</span>
+        </button>
       </div>
     </nav>
   </div>
@@ -308,6 +371,7 @@
         <button class="tab" data-cat="acrylic">Luxury Acrylic</button>
       </div>
       <div class="prod-grid" id="prodGrid"></div>
+      <p class="price-note">Prices are all-inclusive estimates (material, cutting, design preparation &amp; GST), calculated with the same formula as the Instant Price tool. Final price is confirmed on WhatsApp before you pay.</p>
     </div>
   </section>
 
@@ -455,6 +519,7 @@
         <ul>
           <li><a href="#custom">Custom Design</a></li>
           <li><a href="https://cosmo-zen-decor.vercel.app/" target="_blank" rel="noopener">Price Calculator</a></li>
+          <li><a href="CosmoZenDecor_Catalogue.pdf" target="_blank" rel="noopener" download>Download Catalogue</a></li>
           <li><a href="#">Trade &amp; B2B</a></li>
           <li><a href="#">Shipping &amp; Returns</a></li>
         </ul>
@@ -475,6 +540,24 @@
     </div>
   </div>
 </footer>
+
+<div class="cart-overlay" id="cartOverlay"></div>
+<aside class="cart-drawer" id="cartDrawer" role="dialog" aria-modal="true" aria-labelledby="cartTitle" aria-hidden="true">
+  <div class="cart-head">
+    <h2 id="cartTitle">Your Cart</h2>
+    <button type="button" class="cart-close" id="cartClose" aria-label="Close cart">&times;</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-foot">
+    <div class="cart-total"><span>Estimated total</span><span id="cartTotal">₹0</span></div>
+    <div class="cart-note">All-inclusive estimate (material, cutting, design prep &amp; GST). We confirm the final price, timeline and delivery on WhatsApp before you pay anything.</div>
+    <button type="button" class="btn btn-primary" id="cartCheckout" disabled>Send Order on WhatsApp</button>
+    <div class="cart-foot-links">
+      <a href="#payment" id="cartPayLink">Pay booking advance</a>
+      <button type="button" id="cartClear">Clear cart</button>
+    </div>
+  </div>
+</aside>
 
 <a class="wa-float" href="https://wa.me/918802715978" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
   <svg viewBox="0 0 24 24"><path d="M20.5 3.5A11.8 11.8 0 0 0 12 0C5.4 0 .1 5.3.1 11.9c0 2.1.6 4.1 1.6 5.9L0 24l6.4-1.7c1.7.9 3.6 1.4 5.6 1.4 6.6 0 11.9-5.3 11.9-11.9 0-3.2-1.2-6.1-3.4-8.3zM12 21.4c-1.7 0-3.4-.5-4.8-1.3l-.3-.2-3.6 1 1-3.5-.2-.4A9.5 9.5 0 0 1 2.5 12C2.5 6.8 6.8 2.5 12 2.5c2.5 0 4.9 1 6.7 2.8a9.4 9.4 0 0 1 2.8 6.7c0 5.2-4.3 9.4-9.5 9.4z"/></svg>
@@ -535,26 +618,221 @@
     ],
   };
 
+  // ---- Hero video: fall back to the logo if the file can't be loaded ----
+  (function(){
+    const v = document.querySelector('.hero-video');
+    if (!v) return;
+    let done = false;
+    function fallback(){
+      if (done) return; done = true;
+      const img = document.createElement('img');
+      img.src = 'logo.png'; img.alt = 'CosmoZen Decor';
+      img.style.cssText = 'width:100%;max-width:260px;margin:0 auto;';
+      v.replaceWith(img);
+    }
+    v.addEventListener('error', fallback, { once: true });
+    if (v.error || v.networkState === 3) fallback();
+  })();
+
+  // ---- Pricing: same formula as the Instant Price calculator ----
+  const RATES = {
+    mdf:     { 2:{cost:1500, misc:.015, elec:.02,  mach:.05, lab:.02},
+               4:{cost:2000, misc:.016, elec:.025, mach:.06, lab:.03},
+               6:{cost:2500, misc:.017, elec:.03,  mach:.08, lab:.04} },
+    acrylic: { 2:{cost:2500, misc:.015, elec:.03,  mach:.05, lab:.02},
+               4:{cost:3000, misc:.016, elec:.035, mach:.05, lab:.03},
+               6:{cost:4000, misc:.017, elec:.04,  mach:.05, lab:.04} }
+  };
+  const SHEET_AREA = 244 * 122, MARGIN = 0.3, MIN_PRICE = 300;
+  const MAT_LABEL = { mdf:'MDF Wood', acrylic:'Acrylic' };
+  const SIZES = [
+    { key:'s',  label:'Small · 30×45',     l:30, b:45 },
+    { key:'m',  label:'Medium · 45×60',    l:45, b:60 },
+    { key:'l',  label:'Large · 60×90',     l:60, b:90 },
+    { key:'xl', label:'X-Large · 90×120',  l:90, b:120 },
+  ];
+  function unitPrice(mat, th, l, b){
+    const r = RATES[mat][th];
+    const perCm2 = (r.cost / SHEET_AREA + r.misc + r.elec + r.mach + r.lab) * (1 + MARGIN);
+    return Math.max(MIN_PRICE, Math.round(perCm2 * l * b));
+  }
+  const inr = n => '₹' + Number(n).toLocaleString('en-IN');
+  const clampNum = (v, lo, hi) => Math.min(hi, Math.max(lo, Math.round(Number(v)) || lo));
+
+  const matOptionsHTML = `
+    <optgroup label="MDF Wood">
+      <option value="mdf-2">MDF · 2 mm</option><option value="mdf-4" selected>MDF · 4 mm</option><option value="mdf-6">MDF · 6 mm</option>
+    </optgroup>
+    <optgroup label="Acrylic">
+      <option value="acrylic-2">Acrylic · 2 mm</option><option value="acrylic-4">Acrylic · 4 mm</option><option value="acrylic-6">Acrylic · 6 mm</option>
+    </optgroup>`;
+  const sizeOptionsHTML = SIZES.map(s => `<option value="${s.key}"${s.key === 'm' ? ' selected' : ''}>${s.label}</option>`).join('')
+    + '<option value="custom">Custom size…</option>';
+
   function renderProducts(cat){
     const grid = document.getElementById('prodGrid');
     grid.innerHTML = '';
-    PRODUCTS[cat].forEach(([name, img]) => {
+    PRODUCTS[cat].forEach(([name, img], i) => {
+      const uid = cat + '-' + i;
       const card = document.createElement('div');
       card.className = 'prod-card';
       card.innerHTML = `
         <div class="prod-thumb">
-          <img src="images/${img}" alt="${name}" style="width:100%;height:100%;object-fit:cover;display:block;" />
+          <img src="images/${img}" alt="${name}" onerror="this.closest('.prod-card').remove()" style="width:100%;height:100%;object-fit:cover;display:block;" />
         </div>
         <div class="prod-body">
           <h4>${name}</h4>
-          <div class="prod-actions">
-            <a class="btn btn-dark" href="https://cosmo-zen-decor.vercel.app/" target="_blank" rel="noopener">Get Exact Price</a>
-            <a class="btn btn-outline" href="https://wa.me/918802715978" target="_blank" rel="noopener">Enquire</a>
+          <div class="prod-opts">
+            <div class="opt"><label for="mat-${uid}">Material</label><select id="mat-${uid}" class="sel-mat">${matOptionsHTML}</select></div>
+            <div class="opt"><label for="size-${uid}">Size (cm)</label><select id="size-${uid}" class="sel-size">${sizeOptionsHTML}</select></div>
+          </div>
+          <div class="custom-size">
+            <div class="opt"><label for="cw-${uid}">Length (cm)</label><input id="cw-${uid}" class="in-l" type="number" min="5" max="244" value="60" inputmode="numeric" /></div>
+            <div class="opt"><label for="ch-${uid}">Breadth (cm)</label><input id="ch-${uid}" class="in-b" type="number" min="5" max="144" value="45" inputmode="numeric" /></div>
+          </div>
+          <div class="prod-price"><span class="amt"></span><small>est. per piece · all-inclusive</small></div>
+          <button type="button" class="btn btn-primary prod-add">Add to Cart</button>
+          <div class="prod-links">
+            <a href="https://cosmo-zen-decor.vercel.app/" target="_blank" rel="noopener">Exact price</a>
+            <a href="https://wa.me/918802715978?text=${encodeURIComponent("Hi CosmoZen Decor, I'm interested in: " + name)}" target="_blank" rel="noopener">Enquire</a>
           </div>
         </div>`;
       grid.appendChild(card);
+
+      const selMat = card.querySelector('.sel-mat'), selSize = card.querySelector('.sel-size');
+      const customBox = card.querySelector('.custom-size');
+      const inL = card.querySelector('.in-l'), inB = card.querySelector('.in-b');
+      const amt = card.querySelector('.amt'), addBtn = card.querySelector('.prod-add');
+
+      function current(){
+        const [mat, th] = selMat.value.split('-');
+        let l, b, sizeLabel;
+        if (selSize.value === 'custom') {
+          l = clampNum(inL.value, 5, 244); b = clampNum(inB.value, 5, 144);
+          sizeLabel = l + '×' + b + ' cm (custom)';
+        } else {
+          const s = SIZES.find(x => x.key === selSize.value);
+          l = s.l; b = s.b; sizeLabel = s.l + '×' + s.b + ' cm';
+        }
+        return { mat, th: Number(th), l, b, sizeLabel, unit: unitPrice(mat, Number(th), l, b) };
+      }
+      function refresh(){
+        customBox.classList.toggle('show', selSize.value === 'custom');
+        amt.textContent = inr(current().unit);
+      }
+      [selMat, selSize, inL, inB].forEach(el => el.addEventListener('input', refresh));
+      [inL, inB].forEach(el => el.addEventListener('change', () => {
+        inL.value = clampNum(inL.value, 5, 244); inB.value = clampNum(inB.value, 5, 144); refresh();
+      }));
+      refresh();
+
+      addBtn.addEventListener('click', () => {
+        const c = current();
+        addToCart({ name, img, mat: c.mat, th: c.th, l: c.l, b: c.b, sizeLabel: c.sizeLabel, unit: c.unit });
+        addBtn.textContent = 'Added ✓';
+        addBtn.classList.add('added');
+        setTimeout(() => { addBtn.textContent = 'Add to Cart'; addBtn.classList.remove('added'); }, 1500);
+      });
     });
   }
+
+  // ---- Cart ----
+  const CART_KEY = 'cosmozen_cart_v1';
+  const WA_NUMBER = '918802715978';
+  let cart = [];
+  try {
+    const saved = JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+    if (Array.isArray(saved)) cart = saved.filter(it => it && RATES[it.mat] && RATES[it.mat][it.th] && it.qty > 0);
+  } catch (e) { cart = []; }
+  function saveCart(){ try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch (e) {} }
+
+  const cartBtn = document.getElementById('cartBtn'), cartBadge = document.getElementById('cartBadge');
+  const cartOverlay = document.getElementById('cartOverlay'), cartDrawer = document.getElementById('cartDrawer');
+  const cartItemsEl = document.getElementById('cartItems'), cartTotalEl = document.getElementById('cartTotal');
+  const cartCheckout = document.getElementById('cartCheckout');
+
+  function addToCart(item){
+    const key = [item.name, item.mat, item.th, item.l, item.b].join('|');
+    const existing = cart.find(c => c.key === key);
+    if (existing) existing.qty += 1;
+    else cart.push(Object.assign({ key, qty: 1 }, item));
+    saveCart(); renderCart();
+    cartBadge.classList.remove('bump'); void cartBadge.offsetWidth; cartBadge.classList.add('bump');
+  }
+  function el(tag, cls, text){
+    const n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text !== undefined) n.textContent = text;
+    return n;
+  }
+  function itemMeta(it){ return MAT_LABEL[it.mat] + ' ' + it.th + ' mm · ' + it.sizeLabel; }
+  function renderCart(){
+    cartItemsEl.textContent = '';
+    let total = 0, count = 0;
+    if (!cart.length) {
+      cartItemsEl.appendChild(el('div', 'cart-empty', 'Your cart is empty. Pick a material and size on any design and tap “Add to Cart”.'));
+    }
+    cart.forEach(it => {
+      total += it.unit * it.qty; count += it.qty;
+      const row = el('div', 'cart-item');
+      const im = document.createElement('img'); im.src = 'images/' + it.img; im.alt = it.name;
+      const mid = el('div');
+      mid.appendChild(el('div', 'ci-name', it.name));
+      mid.appendChild(el('div', 'ci-meta', itemMeta(it)));
+      const qty = el('div', 'ci-qty');
+      const minus = el('button', '', '−'); minus.type = 'button'; minus.setAttribute('aria-label', 'Decrease quantity of ' + it.name);
+      const q = el('span', '', String(it.qty));
+      const plus = el('button', '', '+'); plus.type = 'button'; plus.setAttribute('aria-label', 'Increase quantity of ' + it.name);
+      minus.addEventListener('click', () => { it.qty -= 1; if (it.qty <= 0) cart = cart.filter(c => c !== it); saveCart(); renderCart(); });
+      plus.addEventListener('click', () => { it.qty = Math.min(99, it.qty + 1); saveCart(); renderCart(); });
+      qty.append(minus, q, plus); mid.appendChild(qty);
+      const right = el('div', 'ci-right');
+      right.appendChild(el('div', 'ci-price', inr(it.unit * it.qty)));
+      const rm = el('button', 'ci-remove', 'Remove'); rm.type = 'button';
+      rm.addEventListener('click', () => { cart = cart.filter(c => c !== it); saveCart(); renderCart(); });
+      right.appendChild(rm);
+      row.append(im, mid, right);
+      cartItemsEl.appendChild(row);
+    });
+    cartTotalEl.textContent = inr(total);
+    cartBadge.textContent = count; cartBadge.hidden = count === 0;
+    cartCheckout.disabled = cart.length === 0;
+    cartBtn.setAttribute('aria-label', 'Open cart, ' + count + (count === 1 ? ' item' : ' items'));
+  }
+
+  let lastFocus = null;
+  function openCart(){
+    lastFocus = document.activeElement;
+    cartDrawer.classList.add('open'); cartOverlay.classList.add('open');
+    cartDrawer.setAttribute('aria-hidden', 'false'); document.body.classList.add('cart-open');
+    document.getElementById('cartClose').focus();
+  }
+  function closeCart(){
+    cartDrawer.classList.remove('open'); cartOverlay.classList.remove('open');
+    cartDrawer.setAttribute('aria-hidden', 'true'); document.body.classList.remove('cart-open');
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  cartBtn.addEventListener('click', openCart);
+  cartOverlay.addEventListener('click', closeCart);
+  document.getElementById('cartClose').addEventListener('click', closeCart);
+  document.getElementById('cartPayLink').addEventListener('click', closeCart);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && cartDrawer.classList.contains('open')) closeCart(); });
+  document.getElementById('cartClear').addEventListener('click', () => { cart = []; saveCart(); renderCart(); });
+
+  cartCheckout.addEventListener('click', () => {
+    if (!cart.length) return;
+    let total = 0;
+    const lines = cart.map((it, i) => {
+      const sub = it.unit * it.qty; total += sub;
+      return (i + 1) + '. ' + it.name + ' — ' + itemMeta(it) + ' × ' + it.qty + ' = Rs. ' + sub.toLocaleString('en-IN');
+    });
+    const msg = "Hi CosmoZen Decor, I'd like to place an order:\n\n" + lines.join('\n')
+      + '\n\nEstimated total: Rs. ' + total.toLocaleString('en-IN')
+      + '\n\nPlease confirm the final price, timeline and delivery details.';
+    window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+  });
+
+  renderCart();
   renderProducts('partitions');
 
   document.querySelectorAll('.tab').forEach(tab => {
