@@ -137,6 +137,8 @@
   .prod-links a{ color:var(--muted); }
   .prod-links a:hover{ color:var(--magenta); }
   .price-note{ color:var(--muted); font-size:.8rem; margin-top:22px; text-align:center; }
+  .load-more{ text-align:center; margin-top:30px; }
+  .load-more[hidden]{ display:none; }
 
   .tabbar{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:30px; }
   .tab{ padding:9px 18px; border-radius:999px; border:1.5px solid var(--stone-line); background:#fff; font-size:.85rem; font-weight:600; cursor:pointer; color:var(--muted); }
@@ -371,6 +373,7 @@
         <button class="tab" data-cat="acrylic">Luxury Acrylic</button>
       </div>
       <div class="prod-grid" id="prodGrid"></div>
+      <div class="load-more" id="loadMoreWrap" hidden><button type="button" class="btn btn-outline" id="loadMoreBtn">Show more designs</button></div>
       <p class="price-note">Prices are all-inclusive estimates (material, cutting, design preparation &amp; GST), calculated with the same formula as the Instant Price tool. Final price is confirmed on WhatsApp before you pay.</p>
     </div>
   </section>
@@ -668,10 +671,28 @@
   const sizeOptionsHTML = SIZES.map(s => `<option value="${s.key}"${s.key === 'm' ? ' selected' : ''}>${s.label}</option>`).join('')
     + '<option value="custom">Custom size…</option>';
 
+  const PAGE_SIZE = 12;
+  let currentCat = 'partitions', shownCount = 0;
+  const moreWrap = document.getElementById('loadMoreWrap'), moreBtn = document.getElementById('loadMoreBtn');
+
   function renderProducts(cat){
+    document.getElementById('prodGrid').innerHTML = '';
+    currentCat = cat; shownCount = 0;
+    appendCards(PAGE_SIZE);
+  }
+  function updateMore(){
+    const total = PRODUCTS[currentCat].length;
+    moreWrap.hidden = shownCount >= total;
+    moreBtn.textContent = 'Show more designs (' + shownCount + ' of ' + total + ' shown)';
+  }
+  function appendCards(count){
+    const cat = currentCat;
     const grid = document.getElementById('prodGrid');
-    grid.innerHTML = '';
-    PRODUCTS[cat].forEach(([name, img], i) => {
+    const list = PRODUCTS[cat];
+    const from = shownCount, to = Math.min(list.length, from + count);
+    shownCount = to;
+    list.slice(from, to).forEach(([name, img], k) => {
+      const i = from + k;
       const uid = cat + '-' + i;
       const card = document.createElement('div');
       card.className = 'prod-card';
@@ -733,7 +754,9 @@
         setTimeout(() => { addBtn.textContent = 'Add to Cart'; addBtn.classList.remove('added'); }, 1500);
       });
     });
+    updateMore();
   }
+  moreBtn.addEventListener('click', () => appendCards(PAGE_SIZE));
 
   // ---- Cart ----
   const CART_KEY = 'cosmozen_cart_v1';
