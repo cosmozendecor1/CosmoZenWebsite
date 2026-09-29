@@ -83,6 +83,8 @@
   .cat-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
   @media (max-width:900px){ .cat-grid{ grid-template-columns:repeat(2,1fr);} }
   @media (max-width:520px){ .cat-grid{ grid-template-columns:1fr;} }
+  .cat-grid-2{ display:grid; grid-template-columns:repeat(2,1fr); gap:20px; max-width:720px; margin:0 auto; }
+  @media (max-width:520px){ .cat-grid-2{ grid-template-columns:1fr; max-width:420px;} }
 
   /* ===== CUSTOM CUT RAW MATERIAL ===== */
   .material-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:24px; margin-top:8px; }
@@ -141,9 +143,18 @@
   .load-more{ text-align:center; margin-top:30px; }
   .load-more[hidden]{ display:none; }
 
-  .tabbar{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:30px; }
-  .tab{ padding:10px 20px; border-radius:999px; border:1.5px solid var(--stone-line); background:#fff; font-size:.98rem; font-weight:600; cursor:pointer; color:var(--muted); }
+  .shop-layout{ display:grid; grid-template-columns:210px 1fr; gap:32px; align-items:start; }
+  .shop-sidebar{ position:sticky; top:112px; display:flex; flex-direction:column; gap:6px; }
+  .tab{ padding:12px 18px; border-radius:12px; border:1.5px solid var(--stone-line); background:#fff; font-size:1rem; font-weight:600; cursor:pointer; color:var(--muted); text-align:left; }
+  .tab .tab-sub{ display:block; font-size:.85rem; font-weight:500; color:var(--muted); margin-top:2px; }
   .tab.active{ background:var(--ink); color:#fff; border-color:var(--ink); }
+  .tab.active .tab-sub{ color:var(--light-muted); }
+  @media (max-width:860px){
+    .shop-layout{ grid-template-columns:1fr; }
+    .shop-sidebar{ position:static; flex-direction:row; overflow-x:auto; gap:10px; padding-bottom:4px; -webkit-overflow-scrolling:touch; }
+    .shop-sidebar .tab{ flex:0 0 auto; white-space:nowrap; }
+    .shop-sidebar .tab .tab-sub{ display:none; }
+  }
 
   /* ===== ABOUT ===== */
   .about-grid{ display:grid; grid-template-columns:1.05fr .95fr; gap:48px; align-items:start; }
@@ -338,38 +349,24 @@
       <div class="section-head">
         <div>
           <div class="eyebrow">SHOP BY COLLECTION</div>
-          <h2>Four disciplines, one design language.</h2>
+          <h2>Two disciplines, one design language.</h2>
         </div>
-        <p>Every category built around its own visual character — from architectural screens to gallery-grade acrylic.</p>
+        <p>Architectural screens that shape a space, and wall d&eacute;cor &mdash; 2D, 3D relief and acrylic &mdash; that finishes it. Pick MDF or acrylic on every piece.</p>
       </div>
-      <div class="cat-grid">
-        <a class="cat-card" href="#partitions">
+      <div class="cat-grid-2">
+        <a class="cat-card" href="#shop" data-cat-link="partitions">
           <div class="cat-thumb">
             <img src="images/wall-partitions/octagon-jali-screen.png" alt="Designer Wall Partitions" style="width:100%;height:100%;object-fit:cover;display:block;" />
           </div>
           <h3>Designer Wall Partitions</h3>
           <div class="cat-sub">Pattern-cut architectural screens</div>
         </a>
-        <a class="cat-card" href="#twod">
+        <a class="cat-card" href="#shop" data-cat-link="walldecor">
           <div class="cat-thumb">
-            <img src="images/wall-decor/tree-of-life.png" alt="2D Wall Décor" style="width:100%;height:100%;object-fit:cover;display:block;" />
+            <img src="images/wall-decor/tree-of-life.png" alt="Wall Décor" style="width:100%;height:100%;object-fit:cover;display:block;" />
           </div>
-          <h3>2D Wall Décor</h3>
-          <div class="cat-sub">Flat-cut, precision engraved</div>
-        </a>
-        <a class="cat-card" href="#threed">
-          <div class="cat-thumb">
-            <img src="images/3d-wall-decor/layered-mountain-arch.png" alt="3D Relief Laser-Cut Wall Art" style="width:100%;height:100%;object-fit:cover;display:block;" />
-          </div>
-          <h3>3D Relief Laser-Cut Wall Art</h3>
-          <div class="cat-sub">Layered, sculptural depth</div>
-        </a>
-        <a class="cat-card" href="#acrylic">
-          <div class="cat-thumb">
-            <img src="images/acrylic/monstera-leaf.png" alt="Luxury Acrylic Wall Art" style="width:100%;height:100%;object-fit:cover;display:block;" />
-          </div>
-          <h3>Luxury Acrylic Wall Art</h3>
-          <div class="cat-sub">Sleek, light-interactive finish</div>
+          <h3>Wall D&eacute;cor</h3>
+          <div class="cat-sub">2D, 3D relief &amp; luxury acrylic</div>
         </a>
       </div>
     </div>
@@ -398,7 +395,7 @@
   </section>
 
   <!-- PRODUCT SHOWCASE WITH TABS -->
-  <section>
+  <section id="shop">
     <div class="wrap">
       <div class="section-head">
         <div>
@@ -406,15 +403,17 @@
           <h2>Browse by category.</h2>
         </div>
       </div>
-      <div class="tabbar">
-        <button class="tab active" data-cat="partitions">Wall Partitions</button>
-        <button class="tab" data-cat="twod">2D Wall Décor</button>
-        <button class="tab" data-cat="threed">3D Relief Laser-Cut Wall Art</button>
-        <button class="tab" data-cat="acrylic">Luxury Acrylic</button>
+      <div class="shop-layout">
+        <div class="shop-sidebar" id="shopSidebar">
+          <button class="tab active" data-cat="partitions">Wall Partitions<span class="tab-sub">Architectural screens</span></button>
+          <button class="tab" data-cat="walldecor">Wall D&eacute;cor<span class="tab-sub">2D, 3D relief &amp; acrylic</span></button>
+        </div>
+        <div>
+          <div class="prod-grid" id="prodGrid"></div>
+          <div class="load-more" id="loadMoreWrap" hidden><button type="button" class="btn btn-outline" id="loadMoreBtn">Show more designs</button></div>
+          <p class="price-note">Estimates include material, cutting, design preparation &amp; GST and use the same formula as the Instant Price tool. <strong>Pricing does not include transport, and the final price may vary depending on the complexity of the design.</strong> We confirm it on WhatsApp before you pay.</p>
+        </div>
       </div>
-      <div class="prod-grid" id="prodGrid"></div>
-      <div class="load-more" id="loadMoreWrap" hidden><button type="button" class="btn btn-outline" id="loadMoreBtn">Show more designs</button></div>
-      <p class="price-note">Estimates include material, cutting, design preparation &amp; GST and use the same formula as the Instant Price tool. <strong>Pricing does not include transport, and the final price may vary depending on the complexity of the design.</strong> We confirm it on WhatsApp before you pay.</p>
     </div>
   </section>
 
@@ -602,10 +601,8 @@
       <div>
         <h4>Shop</h4>
         <ul>
-          <li><a href="#collections">Wall Partitions</a></li>
-          <li><a href="#collections">2D Wall Décor</a></li>
-          <li><a href="#collections">3D Relief Laser-Cut Wall Art</a></li>
-          <li><a href="#collections">Luxury Acrylic</a></li>
+          <li><a href="#shop" data-cat-link="partitions">Wall Partitions</a></li>
+          <li><a href="#shop" data-cat-link="walldecor">Wall D&eacute;cor</a></li>
         </ul>
       </div>
       <div>
@@ -684,7 +681,7 @@
       ["Botanical Vine Screen", "wall-partitions/botanical-vine-screen.png", "mdf"],
       ["Star & Cross Jali Screen", "wall-partitions/star-cross-jali-screen.png", "mdf"],
     ],
-    twod: [
+    walldecor: [
       ["Tree of Life", "wall-decor/tree-of-life.png", "mdf"],
       ["Sunflower Dot Disc", "wall-decor/sunflower-dot-disc.png", "mdf"],
       ["Sun Mandala Disc", "wall-decor/sun-mandala-disc.png", "mdf"],
@@ -696,8 +693,6 @@
       ["Butterfly Filigree Trio", "wall-decor/butterfly-filigree-trio.png", "mdf"],
       ["Rainbow Arches", "wall-decor/rainbow-arches.png", "mdf"],
       ["Seigaiha Wave Panel", "wall-decor/seigaiha-wave-panel.png", "mdf"],
-    ],
-    threed: [
       ["Butterflies Panel", "3d-wall-decor/butterflies.jpg"],
       ["Butterfly Sculpture", "3d-wall-decor/butterfly.jpg"],
       ["Om Relief Sculpture", "3d-wall-decor/om-relief.jpg"],
@@ -712,8 +707,6 @@
       ["Layered Mandala", "3d-wall-decor/layered-mandala.png", "mdf", 4],
       ["Layered Lotus", "3d-wall-decor/layered-lotus.png", "mdf", 4],
       ["Layered Sunburst", "3d-wall-decor/layered-sunburst.png", "mdf", 4],
-    ],
-    acrylic: [
       ["Blue Lotus · Acrylic", "acrylic/lotus-blue.jpg", "acrylic"],
       ["Mountain & Pines · Black Acrylic", "acrylic/mountain-pines-black.jpg", "acrylic"],
       ["Geometric Stag · Black Acrylic", "acrylic/geometric-stag-black.jpg", "acrylic"],
@@ -988,11 +981,18 @@
   renderCart();
   renderProducts('partitions');
 
+  function activateCat(cat){
+    document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.cat === cat));
+    renderProducts(cat);
+  }
   document.querySelectorAll('.tab').forEach(tab => {
-    tab.addEventListener('click', () => {
-      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-      renderProducts(tab.dataset.cat);
+    tab.addEventListener('click', () => activateCat(tab.dataset.cat));
+  });
+  document.querySelectorAll('[data-cat-link]').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      activateCat(link.dataset.catLink);
+      document.getElementById('shop').scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
 
