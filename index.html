@@ -345,28 +345,28 @@
       <div class="cat-grid">
         <a class="cat-card" href="#partitions">
           <div class="cat-thumb">
-            <img src="images/wall-partitions/leaf-and-flower.jpg" alt="Designer Wall Partitions" style="width:100%;height:100%;object-fit:cover;display:block;" />
+            <img src="images/wall-partitions/octagon-jali-screen.png" alt="Designer Wall Partitions" style="width:100%;height:100%;object-fit:cover;display:block;" />
           </div>
           <h3>Designer Wall Partitions</h3>
           <div class="cat-sub">Pattern-cut architectural screens</div>
         </a>
         <a class="cat-card" href="#twod">
           <div class="cat-thumb">
-            <img src="images/wall-decor/radha-krishna.jpg" alt="2D Wall Décor" style="width:100%;height:100%;object-fit:cover;display:block;" />
+            <img src="images/wall-decor/tree-of-life.png" alt="2D Wall Décor" style="width:100%;height:100%;object-fit:cover;display:block;" />
           </div>
           <h3>2D Wall Décor</h3>
           <div class="cat-sub">Flat-cut, precision engraved</div>
         </a>
         <a class="cat-card" href="#threed">
           <div class="cat-thumb">
-            <img src="images/3d-wall-decor/butterfly-triptych.jpg" alt="3D Relief Laser-Cut Wall Art" style="width:100%;height:100%;object-fit:cover;display:block;" />
+            <img src="images/3d-wall-decor/layered-mountain-arch.png" alt="3D Relief Laser-Cut Wall Art" style="width:100%;height:100%;object-fit:cover;display:block;" />
           </div>
           <h3>3D Relief Laser-Cut Wall Art</h3>
           <div class="cat-sub">Layered, sculptural depth</div>
         </a>
         <a class="cat-card" href="#acrylic">
           <div class="cat-thumb">
-            <img src="images/acrylic/bridge.jpg" alt="Luxury Acrylic Wall Art" style="width:100%;height:100%;object-fit:cover;display:block;" />
+            <img src="images/acrylic/monstera-leaf.png" alt="Luxury Acrylic Wall Art" style="width:100%;height:100%;object-fit:cover;display:block;" />
           </div>
           <h3>Luxury Acrylic Wall Art</h3>
           <div class="cat-sub">Sleek, light-interactive finish</div>
@@ -580,11 +580,10 @@
     <div class="wrap">
       <div class="news">
         <h2>Get design ideas &amp; offers.</h2>
-        <p>Occasional emails about new patterns, collections and studio updates. No spam.</p>
-        <form class="news-form" onsubmit="return false;">
-          <input type="email" placeholder="Your email address" required />
-          <button class="btn btn-primary" type="submit">Subscribe</button>
-        </form>
+        <p>Occasional updates about new patterns, collections and studio news &mdash; sent on WhatsApp. No spam.</p>
+        <div class="news-form">
+          <a class="btn btn-primary" href="https://wa.me/918802715978?text=Hi%20CosmoZen%20Decor%2C%20please%20add%20me%20to%20your%20WhatsApp%20updates%20list%20for%20new%20designs%20and%20offers." target="_blank" rel="noopener">Subscribe on WhatsApp</a>
+        </div>
       </div>
     </div>
   </section>
@@ -670,34 +669,33 @@
 
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
+  // [name, image, default material, layers]. layers>1 = a stacked 3D-relief piece (see sheetsNeeded()).
   const PRODUCTS = {
     partitions: [
-      ["Square Pattern Screen", "wall-partitions/square.jpg"],
-      ["Floral Swirl Screen", "wall-partitions/leaf-and-flower.jpg"],
-      ["Leaf Scroll Screen", "wall-partitions/6.jpg"],
-      ["Botanical Grass Screen", "wall-partitions/leaf-and-grass.jpg"],
-      ["Forest Branches Screen", "wall-partitions/9.jpg"],
-      ["Abstract Branch Screen", "wall-partitions/10.jpg"],
-      ["Leaf Lattice Screen", "wall-partitions/leaf-lattice-screen.png"],
-      ["Starlight Leaves Screen", "wall-partitions/starlight-leaves.jpg"],
-      ["Buds & Leaves Screen", "wall-partitions/buds-and-leaves.jpg"],
-      ["Tree Branches Screen", "wall-partitions/tree-branches.jpg"],
-      ["Paisley Swirl Screen", "wall-partitions/paisley-swirl.jpg"],
-      ["Botanical Vine Screen", "wall-partitions/botanical-vine.jpg"],
-      ["Hexagon Lattice Screen", "wall-partitions/hexagon-lattice.jpg"],
+      ["Geometric Bloom Screen · Yellow Acrylic", "wall-partitions/geometric-bloom-yellow.jpg", "acrylic"],
+      ["Floral Lattice Screen · Red Acrylic", "wall-partitions/floral-lattice-red.jpg", "acrylic"],
+      ["Octagon Jali Screen", "wall-partitions/octagon-jali-screen.png", "mdf"],
+      ["Honeycomb Screen", "wall-partitions/honeycomb-screen.png", "mdf"],
+      ["Quatrefoil Lattice Screen", "wall-partitions/quatrefoil-lattice-screen.png", "mdf"],
+      ["Lotus Petal Lattice Screen", "wall-partitions/lotus-petal-lattice-screen.png", "mdf"],
+      ["Rosette Grid Screen", "wall-partitions/rosette-grid-screen.png", "mdf"],
+      ["Diamond Trellis Screen", "wall-partitions/diamond-trellis-screen.png", "mdf"],
+      ["Kagome Screen", "wall-partitions/kagome-screen.png", "mdf"],
+      ["Botanical Vine Screen", "wall-partitions/botanical-vine-screen.png", "mdf"],
+      ["Star & Cross Jali Screen", "wall-partitions/star-cross-jali-screen.png", "mdf"],
     ],
     twod: [
-      ["Buddha Wall Art", "wall-decor/budhha.jpg"],
-      ["Horse & Tree Panel", "wall-decor/horsetree.png"],
-      ["Lion Portrait", "wall-decor/lion.jpg"],
-      ["Custom Name Plate", "wall-decor/name-plate.jpg"],
-      ["Relax Wall Art", "wall-decor/relax.jpg"],
-      ["Sri Yantram", "wall-decor/sriyantram.png"],
-      ["Durga on Lion", "wall-decor/durga-on-lion.jpg"],
-      ["Ganesha", "wall-decor/ganesha.jpg"],
-      ["Jesus & Cross", "wall-decor/jesus-cross.jpg"],
-      ["Radha Krishna", "wall-decor/radha-krishna.jpg"],
-      ["Running Horse", "wall-decor/running-horse.jpg"],
+      ["Tree of Life", "wall-decor/tree-of-life.png", "mdf"],
+      ["Sunflower Dot Disc", "wall-decor/sunflower-dot-disc.png", "mdf"],
+      ["Sun Mandala Disc", "wall-decor/sun-mandala-disc.png", "mdf"],
+      ["Lotus Bloom", "wall-decor/lotus-bloom.png", "mdf"],
+      ["Ginkgo Rings", "wall-decor/ginkgo-rings.png", "mdf"],
+      ["Bamboo Grove", "wall-decor/bamboo-grove.png", "mdf"],
+      ["Sunrise Mountains", "wall-decor/sunrise-mountains.png", "mdf"],
+      ["Butterfly Filigree", "wall-decor/butterfly-filigree.png", "mdf"],
+      ["Butterfly Filigree Trio", "wall-decor/butterfly-filigree-trio.png", "mdf"],
+      ["Rainbow Arches", "wall-decor/rainbow-arches.png", "mdf"],
+      ["Seigaiha Wave Panel", "wall-decor/seigaiha-wave-panel.png", "mdf"],
     ],
     threed: [
       ["Butterflies Panel", "3d-wall-decor/butterflies.jpg"],
@@ -709,16 +707,26 @@
       ["Rubik's Cube Art", "3d-wall-decor/rubicscube.png"],
       ["Tree & Moon Panel", "3d-wall-decor/tree-and-moon.jpg"],
       ["Tree of Eyes", "3d-wall-decor/treeeyes.jpg"],
+      ["Layered Mountain Range", "3d-wall-decor/layered-mountain-range.png", "mdf", 6],
+      ["Layered Mountain Arch", "3d-wall-decor/layered-mountain-arch.png", "mdf", 6],
+      ["Layered Mandala", "3d-wall-decor/layered-mandala.png", "mdf", 4],
+      ["Layered Lotus", "3d-wall-decor/layered-lotus.png", "mdf", 4],
+      ["Layered Sunburst", "3d-wall-decor/layered-sunburst.png", "mdf", 4],
     ],
     acrylic: [
-      ["Bear Acrylic Art", "acrylic/bear.jpg"],
-      ["Bridge Scene", "acrylic/bridge.jpg"],
-      ["Bridge Scene II", "acrylic/bridge2.jpg"],
-      ["Bull Acrylic Art", "acrylic/bull.jpg"],
-      ["Chess Move", "acrylic/chess.jpg"],
-      ["Horse & Girl", "acrylic/horse-girl.jpg"],
-      ["Jeep Acrylic Art", "acrylic/jeep.jpg"],
-      ["River Scene", "acrylic/river.jpg"],
+      ["Blue Lotus · Acrylic", "acrylic/lotus-blue.jpg", "acrylic"],
+      ["Mountain & Pines · Black Acrylic", "acrylic/mountain-pines-black.jpg", "acrylic"],
+      ["Geometric Stag · Black Acrylic", "acrylic/geometric-stag-black.jpg", "acrylic"],
+      ["Green Bamboo · Acrylic", "acrylic/bamboo-grove-green.jpg", "acrylic"],
+      ["Leafy Tree · Black Acrylic", "acrylic/leafy-tree-black.jpg", "acrylic"],
+      ["Mandala Bloom · Yellow Acrylic", "acrylic/mandala-bloom-yellow.jpg", "acrylic"],
+      ["World Map · Black Acrylic", "acrylic/world-map-black.jpg", "acrylic"],
+      ["Leaf Branch · Red Acrylic", "acrylic/leaf-branch.png", "acrylic"],
+      ["Moon Phases · Gold Acrylic", "acrylic/moon-phases.png", "acrylic"],
+      ["Blossom Branch · Blush Acrylic", "acrylic/blossom-branch.png", "acrylic"],
+      ["Monstera Leaf · Green Acrylic", "acrylic/monstera-leaf.png", "acrylic"],
+      ["Palm Frond · Green Acrylic", "acrylic/palm-frond.png", "acrylic"],
+      ["Rangoli Bloom Disc · Yellow Acrylic", "acrylic/rangoli-bloom-disc.png", "acrylic"],
     ],
   };
 
@@ -747,7 +755,7 @@
                4:{cost:3000, misc:.016, elec:.035, mach:.05, lab:.03},
                6:{cost:4000, misc:.017, elec:.04,  mach:.05, lab:.04} }
   };
-  const SHEET_AREA = 244 * 122, MARGIN = 0.3, MIN_PRICE = 300;
+  const SHEET_L = 244, SHEET_B = 122, SHEET_AREA = SHEET_L * SHEET_B, MARGIN = 0.3, MIN_PRICE = 300;
   const MAT_LABEL = { mdf:'MDF Wood', acrylic:'Acrylic' };
   const SIZES = [
     { key:'s',  label:'Small · 30×45',     l:30, b:45 },
@@ -759,6 +767,17 @@
     const r = RATES[mat][th];
     const perCm2 = (r.cost / SHEET_AREA + r.misc + r.elec + r.mach + r.lab) * (1 + MARGIN);
     return Math.max(MIN_PRICE, Math.round(perCm2 * l * b));
+  }
+  // A stacked 3D-relief piece needs one physical 244x122 cm sheet per layer, unless the panel is
+  // small enough that several layers nest onto a single sheet (e.g. 3 small layers can share 1 sheet;
+  // a panel close to full-sheet size needs its own sheet per layer, or several sheets for one layer
+  // if the panel itself is bigger than one sheet).
+  function sheetsNeeded(layers, l, b){
+    if (!layers || layers <= 1) return 1;
+    const perSheet = (a, c) => Math.floor(SHEET_L / a) * Math.floor(SHEET_B / c);
+    const panelsPerSheet = Math.max(perSheet(l, b), perSheet(b, l));
+    if (panelsPerSheet >= 1) return Math.ceil(layers / panelsPerSheet);
+    return layers * Math.ceil((l * b) / (SHEET_L * SHEET_B));
   }
   const inr = n => '₹' + Number(n).toLocaleString('en-IN');
   const clampNum = (v, lo, hi) => Math.min(hi, Math.max(lo, Math.round(Number(v)) || lo));
@@ -793,7 +812,7 @@
     const list = PRODUCTS[cat];
     const from = shownCount, to = Math.min(list.length, from + count);
     shownCount = to;
-    list.slice(from, to).forEach(([name, img], k) => {
+    list.slice(from, to).forEach(([name, img, defMat, layers], k) => {
       const i = from + k;
       const uid = cat + '-' + i;
       const card = document.createElement('div');
@@ -801,6 +820,7 @@
       card.innerHTML = `
         <div class="prod-thumb">
           <img src="images/${img}" alt="${name}" onerror="this.closest('.prod-card').remove()" style="width:100%;height:100%;object-fit:cover;display:block;" />
+          ${layers > 1 ? `<span style="position:absolute;top:10px;right:10px;background:rgba(23,19,15,.72);color:#fff;font-size:.78rem;font-weight:700;letter-spacing:.02em;padding:4px 10px;border-radius:999px;">${layers} layers</span>` : ''}
         </div>
         <div class="prod-body">
           <h4>${name}</h4>
@@ -822,6 +842,7 @@
       grid.appendChild(card);
 
       const selMat = card.querySelector('.sel-mat'), selSize = card.querySelector('.sel-size');
+      if (defMat) selMat.value = defMat + '-4';
       const customBox = card.querySelector('.custom-size');
       const inL = card.querySelector('.in-l'), inB = card.querySelector('.in-b');
       const amt = card.querySelector('.amt'), addBtn = card.querySelector('.prod-add');
@@ -836,7 +857,15 @@
           const s = SIZES.find(x => x.key === selSize.value);
           l = s.l; b = s.b; sizeLabel = s.l + '×' + s.b + ' cm';
         }
-        return { mat, th: Number(th), l, b, sizeLabel, unit: unitPrice(mat, Number(th), l, b) };
+        let unit, sheets;
+        if (layers > 1) {
+          sheets = sheetsNeeded(layers, l, b);
+          unit = sheets * unitPrice(mat, Number(th), SHEET_L, SHEET_B);
+          sizeLabel += ' · ' + layers + ' stacked layers (' + sheets + (sheets === 1 ? ' sheet' : ' sheets') + ')';
+        } else {
+          unit = unitPrice(mat, Number(th), l, b);
+        }
+        return { mat, th: Number(th), l, b, sizeLabel, unit, sheets };
       }
       function refresh(){
         customBox.classList.toggle('show', selSize.value === 'custom');
